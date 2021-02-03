@@ -1,4 +1,3 @@
-
 var submitCoin = $('#submit-crypto');
 
 
