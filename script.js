@@ -27,10 +27,10 @@ function getApi() {
 }
 submitCoin.addEventListener('click', getApi);
 
-    // submitCoin.on('click', function (event) {
-    //     console.log(event);
-    //     event.preventDefault();
-    // });
+// submitCoin.on('click', function (event) {
+//     console.log(event);
+//     event.preventDefault();
+// });
 
 // Bloomberg News API
 const settings = {
@@ -83,7 +83,6 @@ $.ajax(settings).done(function (response) {
         newCardContent.append(newStorySummary);
     }
 });
-
 
 
 
