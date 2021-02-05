@@ -107,7 +107,7 @@ $(document).ready(function () {
             newStoryTitle.addClass("storyTitle");
             newCardContent.append(newStoryTitle);
 
-            // Link story title to the full article and have it open in e new tab
+            // Link story title to the full article and have it open in a new tab
             var newStoryLink = $("<a>");
             newStoryLink.attr("id", "storyLink");
             newStoryLink.html(storyTitle);
