@@ -1,56 +1,94 @@
 $(document).ready(function () {
-    var submitCoin = document.querySelector('#magnify')
 
-    function getApi() {
-        var requestURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd";
-        var searchField = $("#search").val();
+var submitCoin = document.querySelector('#magnify')
 
-        console.log(searchField)
+function getApi() {
+    var requestURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd";
+    var searchField = $("#search").val();
+
+    console.log(searchField);
 
 
-        $.ajax({
-            url: requestURL,
-            method: 'GET',
-        })
-            .then(function (data) { // The object name here is data
-                console.log(data);
+    $.ajax({
+        url: requestURL,
+        method: 'GET',
+    })
+        .then(function (data) {
 
-                var searchResultDataName = data[0].name;
-                var searchResultDataSymbol = data[0].symbol;
-                console.log(searchResultDataName);
-                console.log(searchResultDataSymbol);
+            const match = data.find(coin => searchField === coin.symbol)
+            //console.log("test2");
+            console.log(match);
 
-                const match = data.find(coin => searchField === coin.symbol);
-                console.log("test2");
-                console.log(match); // results search
-
-                $(match);
-
-                // Since we're just trying to populate based off of one piece of data, we need to specify the index, in this case [0]
-                var searchHistory = data[0].current_price; // before this was id, but 'id' is undefined. rename it to 'data' since that is the object name
-                $("#btc").append(searchHistory);
-
-                console.log("test3");
-                console.log(searchHistory);
-
-                // for (var i = 0; i < 10; i++) {
-                //     var searchHistory = document.createElement('h3');
-                //     searchHistory.textContent = data[i].name;
-                //     var test = document.querySelector(".card-content")
-                //     test.appendChild(searchHistory);
+            $(match);
 
 
 
-                // }
-            });
-    }
-    submitCoin.addEventListener('click', getApi);
+            //Trading Volume
 
-    // submitCoin.on('click', function (event) {
-    //     console.log(event);
-    //     event.preventDefault();
-    // });
+            var tradeVol = data[0].total_volume;
+            var volTag = $("<li>");
+            volTag.addClass("span");
+            //volTag.attr("href", tradeVol);
+            volTag.html(" Trading Volume ");
 
+
+            //name of crypto
+
+            var coinName = data[0].name;
+            var cryptoName = $("<li>");
+            cryptoName.addClass("span");
+            cryptoName.html(coinName);
+
+            //current price
+            var searchHistory = data[0].current_price;
+            var marketCap = data[0].market_cap;
+            var newList = $("<ul>");
+            newList.addClass("form")
+            $("#container").append(newList);
+            var listItem = $("<li>");
+            listItem.addClass("span");
+            listItem.html(" Market Price: " + searchHistory);
+
+
+
+
+            //market cap
+            var newItem2 = $("<li>");
+            newItem2.addClass("form");
+            newItem2.html(" Market Cap: " + marketCap);
+
+
+
+            newList.append(coinName);
+            newList.append(newItem2);
+            newList.append(listItem);
+            console.log(volTag.html)
+            newList.append(tradeVol);
+
+
+
+
+
+
+
+
+
+            //debugger;
+
+            //console.log("test3");
+
+
+
+        });
+};
+
+submitCoin.addEventListener('click', getApi);
+
+// submitCoin.on('click', function (event) {
+//     console.log(event);
+//     event.preventDefault();
+// });
+  
     // Bloomberg News API
     const settings = {
         "async": true,
