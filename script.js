@@ -1,69 +1,74 @@
 $(document).ready(function () {
 
-var submitCoin = document.querySelector('#magnify')
+    var submitCoin = document.querySelector('#magnify')
 
-function getApi() {
-    var requestURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd";
-    var searchField = $("#search").val();
+    function getApi() {
+        var requestURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd";
+        var searchField = $("#search").val();
 
-    console.log(searchField);
-
-
-    $.ajax({
-        url: requestURL,
-        method: 'GET',
-    })
-        .then(function (data) {
-
-            const match = data.find(coin => searchField === coin.symbol)
-            //console.log("test2");
-            console.log(match);
-
-            $(match);
+        console.log(searchField);
 
 
+        $.ajax({
+            url: requestURL,
+            method: 'GET',
+        })
+            .then(function (data) {
 
-            //Trading Volume
+                const match = data.find(coin => searchField === coin.symbol)
+                //console.log("test2");
+                console.log(match);
 
-            var tradeVol = data[0].total_volume;
-            var volTag = $("<li>");
-            volTag.addClass("span");
-            //volTag.attr("href", tradeVol);
-            volTag.html(" Trading Volume ");
+                $(match);
 
 
-            //name of crypto
 
-            var coinName = data[0].name;
-            var cryptoName = $("<li>");
-            cryptoName.addClass("span");
-            cryptoName.html(coinName);
+                //Trading Volume
 
-            //current price
-            var searchHistory = data[0].current_price;
-            var marketCap = data[0].market_cap;
-            var newList = $("<ul>");
-            newList.addClass("form")
-            $("#container").append(newList);
-            var listItem = $("<li>");
-            listItem.addClass("span");
-            listItem.html(" Market Price: " + searchHistory);
+                var tradeVol = data[0].total_volume;
+                var volTag = $("<li>");
+                volTag.addClass("span");
+                volTag.html(" Trading Volume ");
+
+
+                //name of crypto
+
+                var coinName = data[0].name;
+                var cryptoName = $("<li>");
+                cryptoName.addClass("span");
+                cryptoName.html(coinName);
+
+                //current price
+                var searchHistory = data[0].current_price;
+                var newList = $("<ul>");
+                newList.addClass("form")
+                $("#recent").append(newList);
+                var curPrice = $("<li>");
+                curPrice.addClass("span");
+                curPrice.html(" Market Price: " + searchHistory);
 
 
 
 
-            //market cap
-            var newItem2 = $("<li>");
-            newItem2.addClass("form");
-            newItem2.html(" Market Cap: " + marketCap);
+                //market cap
+                var marketCap = data[0].market_cap;
+                var mktCap = $("<li>");
+                mktCap.addClass("form");
+                mktCap.html(" Market Cap: " + marketCap);
+
+                //coin icon
+
+                //var coinIcon = data[0].
 
 
 
-            newList.append(coinName);
-            newList.append(newItem2);
-            newList.append(listItem);
-            console.log(volTag.html)
-            newList.append(tradeVol);
+                newList.append(coinName);
+                //console.log(coinName);
+                newList.append(mktCap);
+                //console.log(newItem2);
+                newList.append(curPrice);
+                //console.log(volTag.html)
+                newList.append(tradeVol);
 
 
 
@@ -73,22 +78,22 @@ function getApi() {
 
 
 
-            //debugger;
+                //debugger;
 
-            //console.log("test3");
+                //console.log("test3");
 
 
 
-        });
-};
+            });
+    };
 
-submitCoin.addEventListener('click', getApi);
+    submitCoin.addEventListener('click', getApi);
 
-// submitCoin.on('click', function (event) {
-//     console.log(event);
-//     event.preventDefault();
-// });
-  
+    // submitCoin.on('click', function (event) {
+    //     console.log(event);
+    //     event.preventDefault();
+    // });
+
     // Bloomberg News API
     const settings = {
         "async": true,
