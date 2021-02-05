@@ -3,3 +3,8 @@
     flex-direction: row !important;
 }
 /* News Feed Styling End */
+
+/* Footer Styling */
+.footer-copyright{
+    text-align: center;
+}
