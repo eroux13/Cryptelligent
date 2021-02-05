@@ -42,7 +42,7 @@ $(document).ready(function () {
                 var searchHistory = data[0].current_price;
                 var newList = $("<ul>");
                 newList.addClass("form")
-                $("#recent").append(newList);
+                $("#container").append(newList);
                 var curPrice = $("<li>");
                 curPrice.addClass("span");
                 curPrice.html(" Market Price: " + searchHistory);
