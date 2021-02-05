@@ -28,7 +28,10 @@ $(document).ready(function () {
                 var tradeVol = data[0].total_volume;
                 var volTag = $("<li>");
                 volTag.addClass("span");
-                volTag.html(" Trading Volume ");
+
+                //volTag.attr("href", tradeVol);
+                volTag.html(" Trading Volume: $" + tradeVol);
+
 
 
                 //name of crypto
@@ -40,15 +43,27 @@ $(document).ready(function () {
 
                 //current price
                 var searchHistory = data[0].current_price;
+
+                var marketCap = data[0].market_cap;
                 var newList = $("<ul>");
                 newList.addClass("form")
-                $("#recent").append(newList);
-                var curPrice = $("<li>");
-                curPrice.addClass("span");
-                curPrice.html(" Market Price: " + searchHistory);
+                $("#container").append(newList);
+                var listItem = $("<li>");
+                listItem.addClass("span");
+                listItem.html(" Market Price: $" + searchHistory);
+
+                // crypto img
+                var cryptoImg = data[0].image;
+                var cryptoImgItem = $("<img>");
+                cryptoImgItem.attr("src", cryptoImg);
+                cryptoImgItem.attr("id", "cryptoImg");
+                cryptoImgItem.addClass("responsive-img");
 
 
-
+                //market cap
+                var newItem2 = $("<li>");
+                newItem2.addClass("form");
+                newItem2.html(" Market Cap: $" + marketCap);
 
                 //market cap
                 var marketCap = data[0].market_cap;
@@ -62,23 +77,16 @@ $(document).ready(function () {
 
 
 
+                $("#container").prepend(cryptoImgItem);
                 newList.append(coinName);
-                //console.log(coinName);
-                newList.append(mktCap);
-                //console.log(newItem2);
-                newList.append(curPrice);
-                //console.log(volTag.html)
-                newList.append(tradeVol);
-
-
-
-
-
-
-
+                newList.append(newItem2);
+                newList.append(listItem);
+                console.log(volTag.html)
+                newList.append(volTag);
 
 
                 //debugger;
+
 
                 //console.log("test3");
 

@@ -9,3 +9,12 @@
     text-align: center;
 }
 /* Footer Styling End */
+
+/* Crypto Image Styling */
+#cryptoImg{
+    float: left;
+    height: 120px;
+    width: auto;
+    margin-right: 10px;
+}
+/* Crypto Image Styling End*/
