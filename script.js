@@ -28,7 +28,7 @@ $(document).ready(function () {
                 var tradeVol = data[0].total_volume;
                 var volTag = $("<li>");
                 volTag.addClass("span");
-                volTag.html(" Trading Volume ");
+                volTag.html(" Trading Volume: " + tradeVol);
 
 
                 //name of crypto
@@ -36,13 +36,13 @@ $(document).ready(function () {
                 var coinName = data[0].name;
                 var cryptoName = $("<li>");
                 cryptoName.addClass("span");
-                cryptoName.html(coinName);
+                cryptoName.html(" Name " + coinName);
 
                 //current price
                 var searchHistory = data[0].current_price;
                 var newList = $("<ul>");
                 newList.addClass("form")
-                $("#recent").append(newList);
+                $("#container").append(newList);
                 var curPrice = $("<li>");
                 curPrice.addClass("span");
                 curPrice.html(" Market Price: " + searchHistory);
@@ -56,7 +56,13 @@ $(document).ready(function () {
                 mktCap.addClass("form");
                 mktCap.html(" Market Cap: " + marketCap);
 
-                //coin icon
+
+
+                // crypto img
+                var cryptoImg = data[0].image;
+                var cryptoImgItem = $("<img>");
+                cryptoImgItem.attr("src", cryptoImg);
+                $("#container").prepend(cryptoImgItem);
 
                 //var coinIcon = data[0].
 
@@ -68,7 +74,7 @@ $(document).ready(function () {
                 //console.log(newItem2);
                 newList.append(curPrice);
                 //console.log(volTag.html)
-                newList.append(tradeVol);
+                newList.append(volTag);
 
 
 
@@ -150,7 +156,7 @@ $(document).ready(function () {
             newStoryTitle.addClass("storyTitle");
             newCardContent.append(newStoryTitle);
 
-            // Link story title to the full article and have it open in e new tab
+            // Link story title to the full article and have it open in a new tab
             var newStoryLink = $("<a>");
             newStoryLink.attr("id", "storyLink");
             newStoryLink.html(storyTitle);
