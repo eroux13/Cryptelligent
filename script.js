@@ -28,8 +28,10 @@ $(document).ready(function () {
                 var tradeVol = data[0].total_volume;
                 var volTag = $("<li>");
                 volTag.addClass("span");
+
                 //volTag.attr("href", tradeVol);
                 volTag.html(" Trading Volume: $" + tradeVol);
+
 
 
                 //name of crypto
@@ -41,6 +43,7 @@ $(document).ready(function () {
 
                 //current price
                 var searchHistory = data[0].current_price;
+
                 var marketCap = data[0].market_cap;
                 var newList = $("<ul>");
                 newList.addClass("form")
@@ -62,6 +65,17 @@ $(document).ready(function () {
                 newItem2.addClass("form");
                 newItem2.html(" Market Cap: $" + marketCap);
 
+                //market cap
+                var marketCap = data[0].market_cap;
+                var mktCap = $("<li>");
+                mktCap.addClass("form");
+                mktCap.html(" Market Cap: " + marketCap);
+
+                //coin icon
+
+                //var coinIcon = data[0].
+
+
 
                 $("#container").prepend(cryptoImgItem);
                 newList.append(coinName);
@@ -71,14 +85,8 @@ $(document).ready(function () {
                 newList.append(volTag);
 
 
-
-
-
-
-
-
-
                 //debugger;
+
 
                 //console.log("test3");
 
