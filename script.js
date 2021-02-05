@@ -16,9 +16,19 @@ function getApi() {
         .then(function (data) {
 
             const match = data.find(coin => searchField === coin.symbol)
+            //console.log("test2");
             console.log(match);
 
-            $(match).appendTo('btc')
+            $(match);
+            var searchHistory = data[0].current_price;
+            var marketCap = data[0].market_cap;
+            console.log(marketCap)
+            var lowDayPrice = data[0].low_24hr
+            console.log(lowDayPrice);
+            $("#btc").append(searchHistory);
+
+            //console.log("test3");
+            console.log(searchHistory);
 
 
         });
