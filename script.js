@@ -38,7 +38,7 @@ $(document).ready(function () {
             volTag.append(volTagStacked);
             volTagStacked.attr("href", volDef);
             volTag.addClass("span");
-            volTagStacked.html(" Trading Volume: " + tradeVol);
+            volTagStacked.html(" Trading Volume: $" + tradeVol);
 
 
             //name of crypto
@@ -65,20 +65,21 @@ $(document).ready(function () {
             var curPriceStacked = $("<a>");
             curPrice.append(curPriceStacked)
             curPrice.addClass("span");
-            curPriceStacked.html(" Market Price: " + searchHistory);
+            curPriceStacked.html(" Market Price: $" + searchHistory);
 
 
             //market cap
             var defLink = "https://www.investopedia.com/terms/m/marketcapitalization.asp"
             var marketCap = data[0].market_cap;
             var mktCap = $("<li>");
+            mktCap.attr("id", "mktCap");
             var mktCapStacked = $("<a>");
-            mktCap.append(mktCapStacked);
             mktCapStacked.attr("href", defLink);
+            mktCap.append(mktCapStacked);
 
 
             mktCap.addClass("span");
-            mktCapStacked.html(" Market Cap: " + marketCap);
+            mktCapStacked.html(" Market Cap: $" + marketCap);
 
 
 
@@ -86,6 +87,7 @@ $(document).ready(function () {
             var cryptoImg = data[0].image;
             var cryptoImgItem = $("<img>");
             cryptoImgItem.attr("src", cryptoImg);
+            cryptoImgItem.attr("id", "cryptoImg");
             $("#container").prepend(cryptoImgItem);
 
 
