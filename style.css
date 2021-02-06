@@ -1,20 +1,34 @@
 /* News Feed Styling */
 #flexDirection {
-    flex-direction: row !important;
+  flex-direction: row !important;
 }
 /* News Feed Styling End */
 
 /* Footer Styling */
-.footer-copyright{
-    text-align: center;
+.footer-copyright {
+  text-align: center;
 }
 /* Footer Styling End */
 
-/* Crypto Image Styling */
+/* Trading History Styling*/
+
+.span {
+  margin: 10px 0;
+  padding: 0.5em 0;
+  width: 300px;
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+#bitcoin {
+  font-family: cursive;
+}
+
+/*/* Crypto Image Styling */
 #cryptoImg{
     float: left;
     height: 120px;
     width: auto;
     margin-right: 10px;
 }
-/* Crypto Image Styling End*/
+/* Crypto Image Styling End*/*/
