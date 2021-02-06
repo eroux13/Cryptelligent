@@ -5,7 +5,7 @@ body, html {
 /* Hero image linked here */
 .hero-image {
 background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("heroimage.jpg");
-height: 50%;
+height: 60%;
 
 /* Here image responsivness on all screens */
 background-position: center;
@@ -13,7 +13,7 @@ background-repeat: no-repeat;
 background-size: cover;
 position: relative;
 }
-
+ 
 .hero-text {
   text-align: center;
   position: absolute;
