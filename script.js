@@ -36,27 +36,30 @@ $(document).ready(function () {
 
             $(match);
 
+            console.log(data);
             for (var i = 0; i < data.length; i++) {
 
-                if (searchField === data.name || searchField === data.symbol) {
+                if (searchField.toLowerCase() === data[i].id || searchField.toLowerCase() === data[i].symbol) {
                     searchField = recentCoin
 
-
+                    console.log("Running through conditional statement");
 
                     //Trading Volume
                     var volDef = "https://www.investopedia.com/terms/v/volume.asp"
                     var tradeVol = data[i].total_volume;
+                    console.log("Trade volume: " + tradeVol);
                     var volTag = $("<li>");
                     var volTagStacked = $("<a>");
                     volTag.append(volTagStacked);
                     volTagStacked.attr("href", volDef);
                     volTag.addClass("span");
-                    volTagStacked.html(" Trading Volume: " + tradeVol);
+                    volTagStacked.html(" Trading Volume: $" + tradeVol);
 
 
                     //name of crypto
 
                     var coinName = data[i].name;
+                    console.log("Crypto : " + coinName);
                     var cryptoName = $("<li>");
                     cryptoName.addClass("span");
                     // cryptoName.attr("id", "target");
@@ -64,6 +67,7 @@ $(document).ready(function () {
 
                     //current search name
                     var searchHistory = data[i].current_price;
+                    console.log("Current Price: : " + searchHistory);
                     var newList = $("<ul>");
                     newList.addClass("form");
                     var bitcoinName = $("<h3>");
@@ -78,20 +82,22 @@ $(document).ready(function () {
                     var curPriceStacked = $("<a>");
                     curPrice.append(curPriceStacked)
                     curPrice.addClass("span");
-                    curPriceStacked.html(" Market Price: " + searchHistory);
+                    curPriceStacked.html(" Market Price: $" + searchHistory);
 
 
                     //market cap
                     var defLink = "https://www.investopedia.com/terms/m/marketcapitalization.asp"
                     var marketCap = data[i].market_cap;
+                    console.log("Market Cap: " + marketCap);
                     var mktCap = $("<li>");
+                    mktCap.attr("id", "mktCap");
                     var mktCapStacked = $("<a>");
                     mktCap.append(mktCapStacked);
                     mktCapStacked.attr("href", defLink);
 
 
                     mktCap.addClass("span");
-                    mktCapStacked.html(" Market Cap: " + marketCap);
+                    mktCapStacked.html(" Market Cap: $" + marketCap);
 
 
 
@@ -99,6 +105,7 @@ $(document).ready(function () {
                     var cryptoImg = data[i].image;
                     var cryptoImgItem = $("<img>");
                     cryptoImgItem.attr("src", cryptoImg);
+                    cryptoImgItem.attr("id", "cryptoImg");
                     $("#container").prepend(cryptoImgItem);
 
 
@@ -113,6 +120,9 @@ $(document).ready(function () {
 
 
 
+                }
+                else {
+                    console.log("This is the else statement");
                 }
 
 
@@ -152,7 +162,7 @@ $(document).ready(function () {
     //     "url": "https://bloomberg-market-and-financial-news.p.rapidapi.com/news/list?id=cryptocurrencies",
     //     "method": "GET",
     //     "headers": {
-    //         "x-rapidapi-key": "eafa0d1954mshd8afb1575ec2c58p1ab9adjsn0d8a873b3855",
+    //         "x-rapidapi-key": "00ff810bdamsh6cafd0d251bfd85p1e1d53jsnd43a5739af12",
     //         "x-rapidapi-host": "bloomberg-market-and-financial-news.p.rapidapi.com"
     //     }
     // };
