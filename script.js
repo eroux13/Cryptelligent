@@ -31,11 +31,14 @@ $(document).ready(function () {
 
 
             //Trading Volume
-
+            var volDef = "https://www.investopedia.com/terms/v/volume.asp"
             var tradeVol = data[0].total_volume;
             var volTag = $("<li>");
+            var volTagStacked = $("<a>");
+            volTag.append(volTagStacked);
+            volTagStacked.attr("href", volDef);
             volTag.addClass("span");
-            volTag.html(" Trading Volume: " + tradeVol);
+            volTagStacked.html(" Trading Volume: " + tradeVol);
 
 
             //name of crypto
