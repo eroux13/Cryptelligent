@@ -8,6 +8,7 @@ $(document).ready(function () {
     function getApi() {
         var requestURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd";
         var searchField = $("#search").val();
+        $('#container').empty();
 
 
 
@@ -35,12 +36,21 @@ $(document).ready(function () {
             console.log(match);
 
             $(match);
+<<<<<<< HEAD
 
             console.log(data);
             for (var i = 0; i < data.length; i++) {
 
                 if (searchField.toLowerCase() === data[i].id || searchField.toLowerCase() === data[i].symbol) {
                     searchField = recentCoin
+=======
+            //debugger;
+            console.log(data)
+            for (var i = 0; i < data.length; i++) {
+
+                if (searchField.toLowerCase() === data[i].id || searchField.toLowerCase() === data[i].symbol) {
+                    searchField = recentCoin;
+>>>>>>> 44adf454d0e1f32385bfc8b5587a51ad2b2d7322
 
                     console.log("Running through conditional statement");
 
@@ -81,6 +91,7 @@ $(document).ready(function () {
                     var curPrice = $("<li>");
                     var curPriceStacked = $("<a>");
                     curPrice.append(curPriceStacked)
+                    curPriceStacked.attr("href", mktDef);
                     curPrice.addClass("span");
                     curPriceStacked.html(" Market Price: $" + searchHistory);
 
@@ -90,7 +101,11 @@ $(document).ready(function () {
                     var marketCap = data[i].market_cap;
                     console.log("Market Cap: " + marketCap);
                     var mktCap = $("<li>");
+<<<<<<< HEAD
                     mktCap.attr("id", "mktCap");
+=======
+                    mktCap.attr("id", "mktCap")
+>>>>>>> 44adf454d0e1f32385bfc8b5587a51ad2b2d7322
                     var mktCapStacked = $("<a>");
                     mktCap.append(mktCapStacked);
                     mktCapStacked.attr("href", defLink);
@@ -105,7 +120,11 @@ $(document).ready(function () {
                     var cryptoImg = data[i].image;
                     var cryptoImgItem = $("<img>");
                     cryptoImgItem.attr("src", cryptoImg);
+<<<<<<< HEAD
                     cryptoImgItem.attr("id", "cryptoImg");
+=======
+                    cryptoImgItem.attr("id", "cryptoImg")
+>>>>>>> 44adf454d0e1f32385bfc8b5587a51ad2b2d7322
                     $("#container").prepend(cryptoImgItem);
 
 
@@ -128,7 +147,7 @@ $(document).ready(function () {
 
             }
 
-            //debugger;
+
 
 
 
