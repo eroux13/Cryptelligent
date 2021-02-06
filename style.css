@@ -1,11 +1,25 @@
 /* News Feed Styling */
 #flexDirection {
-    flex-direction: row !important;
+  flex-direction: row !important;
 }
 /* News Feed Styling End */
 
 /* Footer Styling */
-.footer-copyright{
-    text-align: center;
+.footer-copyright {
+  text-align: center;
 }
 /* Footer Styling End */
+
+/* Trading History Styling*/
+
+.span {
+  margin: 10px 0;
+  padding: 0.5em 0;
+  width: 300px;
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+#bitcoin {
+  font-family: cursive;
+}
