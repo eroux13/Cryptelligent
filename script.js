@@ -8,6 +8,7 @@ $(document).ready(function () {
     function getApi() {
         var requestURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd";
         var searchField = $("#search").val();
+        $('#container').empty();
 
 
 
@@ -35,11 +36,12 @@ $(document).ready(function () {
             console.log(match);
 
             $(match);
-
+            //debugger;
+            console.log(data)
             for (var i = 0; i < data.length; i++) {
 
-                if (searchField === data.name || searchField === data.symbol) {
-                    searchField = recentCoin
+                if (searchField.toLowerCase() === data[i].id || searchField.toLowerCase() === data[i].symbol) {
+                    searchField = recentCoin;
 
 
 
@@ -77,6 +79,7 @@ $(document).ready(function () {
                     var curPrice = $("<li>");
                     var curPriceStacked = $("<a>");
                     curPrice.append(curPriceStacked)
+                    curPriceStacked.attr("href", mktDef);
                     curPrice.addClass("span");
                     curPriceStacked.html(" Market Price: " + searchHistory);
 
@@ -85,6 +88,7 @@ $(document).ready(function () {
                     var defLink = "https://www.investopedia.com/terms/m/marketcapitalization.asp"
                     var marketCap = data[i].market_cap;
                     var mktCap = $("<li>");
+                    mktCap.attr("id", "mktCap")
                     var mktCapStacked = $("<a>");
                     mktCap.append(mktCapStacked);
                     mktCapStacked.attr("href", defLink);
@@ -99,6 +103,7 @@ $(document).ready(function () {
                     var cryptoImg = data[i].image;
                     var cryptoImgItem = $("<img>");
                     cryptoImgItem.attr("src", cryptoImg);
+                    cryptoImgItem.attr("id", "cryptoImg")
                     $("#container").prepend(cryptoImgItem);
 
 
@@ -118,7 +123,7 @@ $(document).ready(function () {
 
             }
 
-            //debugger;
+
 
 
 
