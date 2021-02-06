@@ -1,11 +1,63 @@
+body, html {
+  height: 100%;
+}
+
+/* Hero image linked here */
+.hero-image {
+background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("heroimage.jpg");
+height: 50%;
+
+/* Here image responsivness on all screens */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+position: relative;
+}
+
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
 /* News Feed Styling */
 #flexDirection {
-    flex-direction: row !important;
+  flex-direction: row !important;
 }
 /* News Feed Styling End */
 
 /* Footer Styling */
-.footer-copyright{
-    text-align: center;
+.footer-copyright {
+  text-align: center;
 }
 /* Footer Styling End */
+
+/* Trading History Styling*/
+.span {
+  margin: 10px 0;
+  padding: 0.5em;
+  width: 300px;
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+#bitcoin {
+  font-family: cursive;
+}
+
+#mktCap{
+    margin-top: 50px;
+}
+/* Trading History Styling End */
+
+/* Crypto Image Styling */
+#cryptoImg{
+    float: left;
+    height: 120px;
+    width: auto;
+    margin-right: 10px;
+}
+/* Crypto Image Styling End*/

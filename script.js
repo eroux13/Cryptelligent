@@ -2,90 +2,121 @@ $(document).ready(function () {
 
     var submitCoin = document.querySelector('#magnify')
 
+    var storedSearch = JSON.parse(localStorage.getItem("search")) || [];
+
+
     function getApi() {
         var requestURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd";
         var searchField = $("#search").val();
 
         console.log(searchField);
+        storedSearch.push(searchField);
+        console.log("storedSearch = ", storedSearch);
 
+        var recent = $("#recent");
+        var inputValue = $("<h4>");
+        recent.append(inputValue);
+        inputValue.append(storedSearch);
 
         $.ajax({
             url: requestURL,
             method: 'GET',
-        })
-            .then(function (data) {
+        }).then(function (data) {
 
-                const match = data.find(coin => searchField === coin.symbol)
-                //console.log("test2");
-                console.log(match);
+            const match = data.find(coin => searchField === coin.symbol)
+            //console.log("test2");
+            console.log(match);
 
-                $(match);
-
+            $(match);
 
 
-                //Trading Volume
-
-                var tradeVol = data[0].total_volume;
-                var volTag = $("<li>");
-                volTag.addClass("span");
-                volTag.html(" Trading Volume ");
-
-
-                //name of crypto
-
-                var coinName = data[0].name;
-                var cryptoName = $("<li>");
-                cryptoName.addClass("span");
-                cryptoName.html(coinName);
-
-                //current price
-                var searchHistory = data[0].current_price;
-                var newList = $("<ul>");
-                newList.addClass("form")
-                $("#container").append(newList);
-                var curPrice = $("<li>");
-                curPrice.addClass("span");
-                curPrice.html(" Market Price: " + searchHistory);
+            //Trading Volume
+            var volDef = "https://www.investopedia.com/terms/v/volume.asp"
+            var tradeVol = data[0].total_volume;
+            var volTag = $("<li>");
+            var volTagStacked = $("<a>");
+            volTag.append(volTagStacked);
+            volTagStacked.attr("href", volDef);
+            volTag.addClass("span");
+            volTagStacked.html(" Trading Volume: $" + tradeVol);
 
 
+            //name of crypto
+
+            var coinName = data[0].name;
+            var cryptoName = $("<li>");
+            cryptoName.addClass("span");
+            // cryptoName.attr("id", "target");
+            //cryptoName.html(" Name " + coinName);
+
+            //current search name
+            var searchHistory = data[0].current_price;
+            var newList = $("<ul>");
+            newList.addClass("form");
+            var bitcoinName = $("<h3>");
+            bitcoinName.attr("id", "bitcoin");
+            bitcoinName.append(coinName);
+            newList.append(bitcoinName);
+
+            //current price
+            var mktDef = "https://www.investopedia.com/terms/m/market-price.asp"
+            $("#container").append(newList);
+            var curPrice = $("<li>");
+            var curPriceStacked = $("<a>");
+            curPrice.append(curPriceStacked)
+            curPrice.addClass("span");
+            curPriceStacked.html(" Market Price: $" + searchHistory);
 
 
-                //market cap
-                var marketCap = data[0].market_cap;
-                var mktCap = $("<li>");
-                mktCap.addClass("form");
-                mktCap.html(" Market Cap: " + marketCap);
-
-                //coin icon
-
-                //var coinIcon = data[0].
-
+            //market cap
+            var defLink = "https://www.investopedia.com/terms/m/marketcapitalization.asp"
+            var marketCap = data[0].market_cap;
+            var mktCap = $("<li>");
+            mktCap.attr("id", "mktCap");
+            var mktCapStacked = $("<a>");
+            mktCapStacked.attr("href", defLink);
+            mktCap.append(mktCapStacked);
 
 
-                newList.append(coinName);
-                //console.log(coinName);
-                newList.append(mktCap);
-                //console.log(newItem2);
-                newList.append(curPrice);
-                //console.log(volTag.html)
-                newList.append(tradeVol);
-
-
-
-
+            mktCap.addClass("span");
+            mktCapStacked.html(" Market Cap: $" + marketCap);
 
 
 
+            // crypto img
+            var cryptoImg = data[0].image;
+            var cryptoImgItem = $("<img>");
+            cryptoImgItem.attr("src", cryptoImg);
+            cryptoImgItem.attr("id", "cryptoImg");
+            $("#container").prepend(cryptoImgItem);
 
 
-                //debugger;
 
-                //console.log("test3");
+            newList.append(mktCap);
+            //console.log(newItem2);
+            newList.append(curPrice);
+            //console.log(volTag.html)
+            newList.append(volTag);
 
 
 
-            });
+
+
+
+
+
+
+
+            //debugger;
+
+
+
+
+
+        });
     };
+
+    localStorage.setItem("search", JSON.stringify(storedSearch));
 
     submitCoin.addEventListener('click', getApi);
 

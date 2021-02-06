@@ -1,3 +1,4 @@
-# project1_dreamTeam
+# Cryptelligent
 
-## test
+Welcome to Cryptelligent! This app that allows you to search the trending
+cryptocurrencies and monitor specific coins, as well as read realted stories on crypto.
