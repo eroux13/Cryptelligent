@@ -3,11 +3,15 @@ $(document).ready(function () {
     var submitCoin = document.querySelector('#magnify')
 
     var storedSearch = JSON.parse(localStorage.getItem("search")) || [];
-
+    var recentCoin = "";
 
     function getApi() {
         var requestURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd";
         var searchField = $("#search").val();
+
+        if (searchField === "") {
+            searchField = recentCoin
+        }
 
         console.log(searchField);
         storedSearch.push(searchField);
@@ -15,8 +19,10 @@ $(document).ready(function () {
 
         var recent = $("#recent");
         var inputValue = $("<h4>");
+        inputValue.addClass("value");
+
         recent.append(inputValue);
-        inputValue.append(storedSearch);
+        inputValue.text(searchField);
 
         $.ajax({
             url: requestURL,
@@ -111,12 +117,19 @@ $(document).ready(function () {
 
 
 
-
-
         });
+        console.log(storedSearch);
+        localStorage.setItem("search", JSON.stringify(storedSearch));
+        $("#search").val("");
+
+
     };
 
-    localStorage.setItem("search", JSON.stringify(storedSearch));
+    $('body').on('click', '.value', function () {
+        console.log($(this).text())
+        recentCoin = $(this).text()
+    })
+
 
     submitCoin.addEventListener('click', getApi);
 
