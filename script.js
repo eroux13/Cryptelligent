@@ -23,25 +23,25 @@ $(document).ready(function () {
         }).then(function (data) {
 
             const match = data.find(coin => searchField === coin.symbol)
-            //console.log("test2");
+
             console.log(match);
 
             $(match);
 
-            //Trading Volume
+            // Trading Volume
             var tradeVol = data[0].total_volume;
             var volTag = $("<li>");
             volTag.addClass("span");
-            volTag.html(" Trading Volume: " + tradeVol);
+            volTag.html(" Trading Volume: $" + tradeVol);
 
-            //name of crypto
+            // Name of crypto
             var coinName = data[0].name;
             var cryptoName = $("<li>");
             cryptoName.addClass("span");
             // cryptoName.attr("id", "target");
-            //cryptoName.html(" Name " + coinName);
+            // cryptoName.html(" Name " + coinName);
 
-            //current price
+            // Current price
             var searchHistory = data[0].current_price;
             var newList = $("<ul>");
             newList.addClass("form");
@@ -56,38 +56,28 @@ $(document).ready(function () {
             curPrice.addClass("span");
             curPrice.html(" Market Price: $" + searchHistory);
 
-                // crypto img
-                var cryptoImg = data[0].image;
-                var cryptoImgItem = $("<img>");
-                cryptoImgItem.attr("src", cryptoImg);
-                cryptoImgItem.attr("id", "cryptoImg");
-                cryptoImgItem.addClass("responsive-img");
-            
-            //market cap (Not sure which one here we need)
-            var marketCap = data[0].market_cap;
-            var mktCap = $("<li>");
-            mktCap.addClass("span");
-            mktCap.html(" Market Cap: $" + marketCap);
-
-                //market cap (Not sure which one here we need)
-                var newItem2 = $("<li>");
-                newItem2.addClass("form");
-                newItem2.html(" Market Cap: $" + marketCap);
-
-
-            // crypto img
+            // Crypto img
             var cryptoImg = data[0].image;
             var cryptoImgItem = $("<img>");
             cryptoImgItem.attr("src", cryptoImg);
+            cryptoImgItem.attr("id", "cryptoImg");
+            cryptoImgItem.addClass("responsive-img");
             $("#container").prepend(cryptoImgItem);
 
+            // Market cap
+            var marketCap = data[0].market_cap;
+            var mktCap = $("<li>");
+            mktCap.addClass("span");
+            mktCap.attr("id", "mktCap");
+            mktCap.html(" Market Cap: $" + marketCap);
+
             newList.append(mktCap);
-            //console.log(newItem2);
+            // console.log(newItem2);
             newList.append(curPrice);
-            //console.log(volTag.html)
+            // console.log(volTag.html)
             newList.append(volTag);
 
-            //debugger;
+            // debugger;
 
         });
     };
