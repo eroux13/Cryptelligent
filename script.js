@@ -4,7 +4,6 @@ $(document).ready(function () {
 
     var storedSearch = JSON.parse(localStorage.getItem("search")) || [];
 
-
     function getApi() {
         var requestURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd";
         var searchField = $("#search").val();
@@ -29,20 +28,13 @@ $(document).ready(function () {
 
             $(match);
 
-
-
-
-
             //Trading Volume
-
             var tradeVol = data[0].total_volume;
             var volTag = $("<li>");
             volTag.addClass("span");
             volTag.html(" Trading Volume: " + tradeVol);
 
-
             //name of crypto
-
             var coinName = data[0].name;
             var cryptoName = $("<li>");
             cryptoName.addClass("span");
@@ -62,17 +54,25 @@ $(document).ready(function () {
             $("#container").append(newList);
             var curPrice = $("<li>");
             curPrice.addClass("span");
-            curPrice.html(" Market Price: " + searchHistory);
+            curPrice.html(" Market Price: $" + searchHistory);
 
-
-
-
-            //market cap
+                // crypto img
+                var cryptoImg = data[0].image;
+                var cryptoImgItem = $("<img>");
+                cryptoImgItem.attr("src", cryptoImg);
+                cryptoImgItem.attr("id", "cryptoImg");
+                cryptoImgItem.addClass("responsive-img");
+            
+            //market cap (Not sure which one here we need)
             var marketCap = data[0].market_cap;
             var mktCap = $("<li>");
             mktCap.addClass("span");
-            mktCap.html(" Market Cap: " + marketCap);
+            mktCap.html(" Market Cap: $" + marketCap);
 
+                //market cap (Not sure which one here we need)
+                var newItem2 = $("<li>");
+                newItem2.addClass("form");
+                newItem2.html(" Market Cap: $" + marketCap);
 
 
             // crypto img
@@ -81,31 +81,13 @@ $(document).ready(function () {
             cryptoImgItem.attr("src", cryptoImg);
             $("#container").prepend(cryptoImgItem);
 
-
-
-
-
-
             newList.append(mktCap);
             //console.log(newItem2);
             newList.append(curPrice);
             //console.log(volTag.html)
             newList.append(volTag);
 
-
-
-
-
-
-
-
-
-
             //debugger;
-
-
-
-
 
         });
     };
