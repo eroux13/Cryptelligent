@@ -5,15 +5,16 @@ $(document).ready(function () {
     var storedSearch = JSON.parse(localStorage.getItem("search")) || [];
     var recentCoin = "";
 
+    // CoinGecko API
     function getApi() {
         var requestURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd";
         var searchField = $("#search").val();
+
+        // On page load, these elements will be hidden. Once the user searches for a crypto it will display
+        $('.hidden').removeClass("hidden");
+
+        // This will clear out the previous search in the container div 
         $('#container').empty();
-
-
-
-
-
 
         console.log(searchField);
         storedSearch.push(searchField);
@@ -32,40 +33,50 @@ $(document).ready(function () {
         }).then(function (data) {
 
             const match = data.find(coin => searchField === coin.symbol)
-            //console.log("test2");
+
             console.log(match);
 
             $(match);
-            //debugger;
+
             console.log(data)
+
+            // Loop through all the possible cryptos
             for (var i = 0; i < data.length; i++) {
 
+                // Match the user input to crypto name or symbol
                 if (searchField.toLowerCase() === data[i].id || searchField.toLowerCase() === data[i].symbol) {
+
+                    // Crypto dataset variables
                     searchField = recentCoin;
-
-
-
-                    //Trading Volume
-                    var volDef = "https://www.investopedia.com/terms/v/volume.asp"
+                    var cryptoImg = data[i].image;
+                    var coinName = data[i].name;
+                    var searchHistory = data[i].current_price;
+                    var marketCap = data[i].market_cap;
                     var tradeVol = data[i].total_volume;
+
+                    // Function to format monetary value
+                    const format = (num) => num.toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                    });
+
+                    // Trading Volume
+                    var volDef = "https://www.investopedia.com/terms/v/volume.asp"
+                    console.log("Trade volume: " + tradeVol);
                     var volTag = $("<li>");
                     var volTagStacked = $("<a>");
                     volTag.append(volTagStacked);
                     volTagStacked.attr("href", volDef);
                     volTag.addClass("span");
-                    volTagStacked.html(" Trading Volume: " + tradeVol);
+                    volTagStacked.html(" Trading Volume: $" + format(tradeVol));
 
-
-                    //name of crypto
-
-                    var coinName = data[i].name;
+                    // Name of crypto
+                    console.log("Crypto : " + coinName);
                     var cryptoName = $("<li>");
                     cryptoName.addClass("span");
-                    // cryptoName.attr("id", "target");
-                    //cryptoName.html(" Name " + coinName);
 
-                    //current search name
-                    var searchHistory = data[i].current_price;
+                    // Current Price
+                    console.log("Current Price: : " + searchHistory);
                     var newList = $("<ul>");
                     newList.addClass("form");
                     var bitcoinName = $("<h3>");
@@ -73,74 +84,55 @@ $(document).ready(function () {
                     bitcoinName.append(coinName);
                     newList.append(bitcoinName);
 
-                    //current price
+                    // Market price
                     var mktDef = "https://www.investopedia.com/terms/m/market-price.asp"
                     $("#container").append(newList);
                     var curPrice = $("<li>");
                     var curPriceStacked = $("<a>");
+                    curPrice.attr("id", "curPrice");
                     curPrice.append(curPriceStacked)
                     curPriceStacked.attr("href", mktDef);
                     curPrice.addClass("span");
-                    curPriceStacked.html(" Market Price: " + searchHistory);
+                    curPriceStacked.html(" Market Price: $" + format(searchHistory));
 
-
-                    //market cap
+                    // Market cap
                     var defLink = "https://www.investopedia.com/terms/m/marketcapitalization.asp"
-                    var marketCap = data[i].market_cap;
+                    console.log("Market Cap: " + marketCap);
                     var mktCap = $("<li>");
-                    mktCap.attr("id", "mktCap")
                     var mktCapStacked = $("<a>");
                     mktCap.append(mktCapStacked);
                     mktCapStacked.attr("href", defLink);
-
-
                     mktCap.addClass("span");
-                    mktCapStacked.html(" Market Cap: " + marketCap);
+                    mktCapStacked.html(" Market Cap: $" + format(marketCap));
 
-
-
-                    // crypto img
-                    var cryptoImg = data[i].image;
+                    // Crypto img
                     var cryptoImgItem = $("<img>");
                     cryptoImgItem.attr("src", cryptoImg);
-                    cryptoImgItem.attr("id", "cryptoImg")
+                    cryptoImgItem.attr("id", "cryptoImg");
                     $("#container").prepend(cryptoImgItem);
 
-
-
-                    newList.append(mktCap);
-                    //console.log(newItem2);
                     newList.append(curPrice);
-                    //console.log(volTag.html)
+                    newList.append(mktCap);
                     newList.append(volTag);
 
-
-
-
-
                 }
-
-
+                else {
+                    // Have a modal pop up syaing Crypto doesn't exist when a user input is invalid?
+                    console.log("This is the else statement");
+                }
             }
-
-
-
-
-
         });
         console.log(storedSearch);
         localStorage.setItem("search", JSON.stringify(storedSearch));
         $("#search").val("");
-
-
     };
 
+    // This will make previous searches clickable
     $('body').on('click', '.value', function () {
         console.log($(this).text())
         recentCoin = $(this).text()
         getApi()
     })
-
 
     submitCoin.addEventListener('click', getApi);
 
@@ -149,15 +141,15 @@ $(document).ready(function () {
     //     event.preventDefault();
     // });
 
+    // Leave this part commented out for now so that we dont use up all the API calls again
     // Bloomberg News API 
-    // Commented out for now since we hit the API Call limit (500/month for the free tier)
     // const settings = {
     //     "async": true,
     //     "crossDomain": true,
     //     "url": "https://bloomberg-market-and-financial-news.p.rapidapi.com/news/list?id=cryptocurrencies",
     //     "method": "GET",
     //     "headers": {
-    //         "x-rapidapi-key": "eafa0d1954mshd8afb1575ec2c58p1ab9adjsn0d8a873b3855",
+    //         "x-rapidapi-key": "00ff810bdamsh6cafd0d251bfd85p1e1d53jsnd43a5739af12",
     //         "x-rapidapi-host": "bloomberg-market-and-financial-news.p.rapidapi.com"
     //     }
     // };
