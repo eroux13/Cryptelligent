@@ -9,129 +9,140 @@ $(document).ready(function () {
     function getApi() {
         var requestURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd";
 
-        // Bug #1 Explanation (part 1 of 2): Initially searchField will have a value since the user will input either the symbol or name
-        // of the crypto. Once the getAPI() function has fully completed its run through the searchField is cleared (Line 134). Conintue to Line 141.
-        var searchField = $("#search").val();
+        // Bug #3 Explanation: So this newly added conditional will check to see if the container is already populated. If it is, it will clear its content
+        // similar to Line 29 then run the function again. If not, it will run getAPI() like usual.
+        if ($('#container').children().length > 0) {
 
-        // On page load, these elements will be hidden. Once the user searches for a crypto it will display
-        $('.hidden').removeClass("hidden");
+            $('#container').empty();
+            getApi();
 
-        // This will clear out the previous search in the container div 
-        $('#container').empty();
+        }
+        else {
+            // Bug #1 Explanation (part 1 of 2): Initially searchField will have a value since the user will input either the symbol or name
+            // of the crypto. Once the getAPI() function has fully completed its run through the searchField is cleared (Line 134). Conintue to Line 141.
+            var searchField = $("#search").val();
 
-        console.log(searchField);
-        storedSearch.push(searchField);
-        console.log("storedSearch = ", storedSearch);
+            // On page load, these elements will be hidden. Once the user searches for a crypto it will display
+            $('.hidden').removeClass("hidden");
 
-        var recent = $("#recent");
-        var inputValue = $("<h4>");
-        inputValue.addClass("value");
+            // This will clear out the previous search in the container div 
+            $('#container').empty();
 
-        recent.append(inputValue);
-        inputValue.text(searchField);
+            console.log(searchField);
+            storedSearch.push(searchField);
+            console.log("storedSearch = ", storedSearch);
 
-        $.ajax({
-            url: requestURL,
-            method: 'GET',
-        }).then(function (data) {
+            var recent = $("#recent");
+            var inputValue = $("<h4>");
+            inputValue.addClass("value");
 
-            // Bug #2 Explanation: Added another conditional here
-            // At first we were comparing symbols so that if a user inputs the correct symbol it would display
-            // however when a user inputs the actual name it wouldn't run/display anything on the page
-            // this was being bypassed in the for loop below since we declared both a match with the symbol or the name
-            const match = data.find(coin => searchField === coin.symbol || searchField === coin.id)
+            // Changed this to prepend so that the most recent searches populate on top
+            recent.prepend(inputValue);
+            inputValue.text(searchField);
 
-            console.log(match);
+            $.ajax({
+                url: requestURL,
+                method: 'GET',
+            }).then(function (data) {
 
-            $(match);
+                // Bug #2 Explanation: Added another conditional here
+                // At first we were comparing symbols so that if a user inputs the correct symbol it would display
+                // however when a user inputs the actual name it wouldn't run/display anything on the page
+                // this was being bypassed in the for loop below since we declared both a match with the symbol or the name
+                const match = data.find(coin => searchField === coin.symbol || searchField === coin.id)
 
-            console.log(data)
+                console.log(match);
 
-            // Loop through all the possible cryptos
-            for (var i = 0; i < data.length; i++) {
+                $(match);
 
-                // Match the user input to crypto name or symbol
-                if (searchField.toLowerCase() === data[i].id || searchField.toLowerCase() === data[i].symbol) {
+                console.log(data)
 
-                    // Crypto dataset variables
-                    searchField = recentCoin;
-                    var cryptoImg = data[i].image;
-                    var coinName = data[i].name;
-                    var searchHistory = data[i].current_price;
-                    var marketCap = data[i].market_cap;
-                    var tradeVol = data[i].total_volume;
+                // Loop through all the possible cryptos
+                for (var i = 0; i < data.length; i++) {
 
-                    // Function to format monetary value
-                    const format = (num) => num.toLocaleString('en-US', {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                    });
+                    // Match the user input to crypto name or symbol
+                    if (searchField.toLowerCase() === data[i].id || searchField.toLowerCase() === data[i].symbol) {
 
-                    // Trading Volume
-                    var volDef = "https://www.investopedia.com/terms/v/volume.asp"
-                    console.log("Trade volume: " + tradeVol);
-                    var volTag = $("<li>");
-                    var volTagStacked = $("<a>");
-                    volTag.append(volTagStacked);
-                    volTagStacked.attr("href", volDef);
-                    volTag.addClass("span");
-                    volTagStacked.html(" Trading Volume: $" + format(tradeVol));
+                        // Crypto dataset variables
+                        searchField = recentCoin;
+                        var cryptoImg = data[i].image;
+                        var coinName = data[i].name;
+                        var searchHistory = data[i].current_price;
+                        var marketCap = data[i].market_cap;
+                        var tradeVol = data[i].total_volume;
 
-                    // Name of crypto
-                    console.log("Crypto : " + coinName);
-                    var cryptoName = $("<li>");
-                    cryptoName.addClass("span");
+                        // Function to format monetary value
+                        const format = (num) => num.toLocaleString('en-US', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                        });
 
-                    // Current Price
-                    console.log("Current Price: : " + searchHistory);
-                    var newList = $("<ul>");
-                    newList.addClass("form");
-                    var bitcoinName = $("<h3>");
-                    bitcoinName.attr("id", "bitcoin");
-                    bitcoinName.append(coinName);
-                    newList.append(bitcoinName);
+                        // Trading Volume
+                        var volDef = "https://www.investopedia.com/terms/v/volume.asp"
+                        console.log("Trade volume: " + tradeVol);
+                        var volTag = $("<li>");
+                        var volTagStacked = $("<a>");
+                        volTag.append(volTagStacked);
+                        volTagStacked.attr("href", volDef);
+                        volTag.addClass("span");
+                        volTagStacked.html(" Trading Volume: $" + format(tradeVol));
 
-                    // Market price
-                    var mktDef = "https://www.investopedia.com/terms/m/market-price.asp"
-                    $("#container").append(newList);
-                    var curPrice = $("<li>");
-                    var curPriceStacked = $("<a>");
-                    curPrice.attr("id", "curPrice");
-                    curPrice.append(curPriceStacked)
-                    curPriceStacked.attr("href", mktDef);
-                    curPrice.addClass("span");
-                    curPriceStacked.html(" Market Price: $" + format(searchHistory));
+                        // Name of crypto
+                        console.log("Crypto : " + coinName);
+                        var cryptoName = $("<li>");
+                        cryptoName.addClass("span");
 
-                    // Market cap
-                    var defLink = "https://www.investopedia.com/terms/m/marketcapitalization.asp"
-                    console.log("Market Cap: " + marketCap);
-                    var mktCap = $("<li>");
-                    var mktCapStacked = $("<a>");
-                    mktCap.append(mktCapStacked);
-                    mktCapStacked.attr("href", defLink);
-                    mktCap.addClass("span");
-                    mktCapStacked.html(" Market Cap: $" + format(marketCap));
+                        // Current Price
+                        console.log("Current Price: : " + searchHistory);
+                        var newList = $("<ul>");
+                        newList.addClass("form");
+                        var bitcoinName = $("<h3>");
+                        bitcoinName.attr("id", "bitcoin");
+                        bitcoinName.append(coinName);
+                        newList.append(bitcoinName);
 
-                    // Crypto img
-                    var cryptoImgItem = $("<img>");
-                    cryptoImgItem.attr("src", cryptoImg);
-                    cryptoImgItem.attr("id", "cryptoImg");
-                    $("#container").prepend(cryptoImgItem);
+                        // Market price
+                        var mktDef = "https://www.investopedia.com/terms/m/market-price.asp"
+                        $("#container").append(newList);
+                        var curPrice = $("<li>");
+                        var curPriceStacked = $("<a>");
+                        curPrice.attr("id", "curPrice");
+                        curPrice.append(curPriceStacked)
+                        curPriceStacked.attr("href", mktDef);
+                        curPrice.addClass("span");
+                        curPriceStacked.html(" Market Price: $" + format(searchHistory));
 
-                    newList.append(curPrice);
-                    newList.append(mktCap);
-                    newList.append(volTag);
+                        // Market cap
+                        var defLink = "https://www.investopedia.com/terms/m/marketcapitalization.asp"
+                        console.log("Market Cap: " + marketCap);
+                        var mktCap = $("<li>");
+                        var mktCapStacked = $("<a>");
+                        mktCap.append(mktCapStacked);
+                        mktCapStacked.attr("href", defLink);
+                        mktCap.addClass("span");
+                        mktCapStacked.html(" Market Cap: $" + format(marketCap));
 
+                        // Crypto img
+                        var cryptoImgItem = $("<img>");
+                        cryptoImgItem.attr("src", cryptoImg);
+                        cryptoImgItem.attr("id", "cryptoImg");
+                        $("#container").prepend(cryptoImgItem);
+
+                        newList.append(curPrice);
+                        newList.append(mktCap);
+                        newList.append(volTag);
+
+                    }
+                    else {
+                        // Have a modal pop up syaing Crypto doesn't exist when a user input is invalid?
+                        console.log("This is the else statement");
+                    }
                 }
-                else {
-                    // Have a modal pop up syaing Crypto doesn't exist when a user input is invalid?
-                    console.log("This is the else statement");
-                }
-            }
-        });
-        console.log(storedSearch);
-        localStorage.setItem("search", JSON.stringify(storedSearch));
-        $("#search").val("");
+            });
+            console.log(storedSearch);
+            localStorage.setItem("search", JSON.stringify(storedSearch));
+            $("#search").val("");
+        }
     };
 
     // This will make previous searches clickable
