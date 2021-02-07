@@ -72,3 +72,8 @@ position: relative;
     border-bottom: 1px solid rgba(128, 128, 128, 0.288);
     padding-bottom: 20px;
 }
+#recent{
+    overflow: auto;
+    height: 400px;
+}
+/* Recent Searches Styling End */
