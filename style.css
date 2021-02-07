@@ -6,7 +6,7 @@ body, html {
     display: none;
 }
 
-/* Hero image linked here */
+/* Hero Image Styling */
 .hero-image {
 background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("heroimage.jpg");
 height: 60%;
@@ -26,6 +26,7 @@ position: relative;
   transform: translate(-50%, -50%);
   color: white;
 }
+/* Hero Image Styling End */
 
 /* News Feed Styling */
 #flexDirection {
@@ -65,3 +66,9 @@ position: relative;
     margin-right: 10px;
 }
 /* Crypto Image Styling End*/
+
+/* Recent Searches Styling */
+.value{
+    border-bottom: 1px solid rgba(128, 128, 128, 0.288);
+    padding-bottom: 20px;
+}
