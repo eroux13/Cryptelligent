@@ -2,6 +2,10 @@ body, html {
   height: 100%;
 }
 
+.hidden {
+    display: none;
+}
+
 /* Hero image linked here */
 .hero-image {
 background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("heroimage.jpg");
@@ -48,7 +52,7 @@ position: relative;
   font-family: cursive;
 }
 
-#mktCap{
+#curPrice{
     margin-top: 50px;
 }
 /* Trading History Styling End */
