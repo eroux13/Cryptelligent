@@ -70,12 +70,29 @@ $(document).ready(function () {
                         var searchHistory = data[i].current_price;
                         var marketCap = data[i].market_cap;
                         var tradeVol = data[i].total_volume;
+                        var dayHigh = data[i].high_24h;
+                        var dayLow = data[i].low_24h;
+
 
                         // Function to format monetary value
                         const format = (num) => num.toLocaleString('en-US', {
                             minimumFractionDigits: 2,
                             maximumFractionDigits: 2,
                         });
+
+                        //Daily Low Price
+                        var dayTradeLow = $("<li>");
+                        dayTradeLow.addClass("span");
+                        dayTradeLow.append(dayLow);
+                        dayTradeLow.html("24hr Low Price: $" + format(dayLow));
+                        console.log(dayLow);
+
+                        // Daily High Price
+                        var dayTradeHigh = $("<li>");
+                        dayTradeHigh.addClass("span");
+                        dayTradeHigh.append(dayHigh);
+                        dayTradeHigh.html("24hr High Price: $" + format(dayHigh));
+                        console.log(dayHigh);
 
                         // Trading Volume
                         var volDef = "https://www.investopedia.com/terms/v/volume.asp"
@@ -131,6 +148,8 @@ $(document).ready(function () {
                         newList.append(curPrice);
                         newList.append(mktCap);
                         newList.append(volTag);
+                        newList.append(dayTradeHigh);
+                        newList.append(dayTradeLow)
 
                     }
                     else {
