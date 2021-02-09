@@ -72,6 +72,8 @@ $(document).ready(function () {
                         var tradeVol = data[i].total_volume;
                         var dayHigh = data[i].high_24h;
                         var dayLow = data[i].low_24h;
+                        var maxSupply = data[i].max_supply;
+                        var circSupply = data[i].circulating_supply;
 
 
                         // Function to format monetary value
@@ -79,6 +81,20 @@ $(document).ready(function () {
                             minimumFractionDigits: 2,
                             maximumFractionDigits: 2,
                         });
+
+                        //Maximum Supply
+                        var maxCoin = $("<li>");
+                        maxCoin.addClass("span");
+                        maxCoin.append(maxSupply);
+                        maxCoin.html("Maximum Supply: " + format(maxSupply));
+                        console.log(maxSupply)
+
+                        //Circulating Supply
+                        var recSupply = $("<li>");
+                        recSupply.addClass("span");
+                        recSupply.append(circSupply);
+                        recSupply.html("Circulating Supply: " + format(circSupply));
+                        console.log(recSupply)
 
                         //Daily Low Price
                         var dayTradeLow = $("<li>");
@@ -149,8 +165,9 @@ $(document).ready(function () {
                         newList.append(mktCap);
                         newList.append(volTag);
                         newList.append(dayTradeHigh);
-                        newList.append(dayTradeLow)
-
+                        newList.append(dayTradeLow);
+                        newList.append(maxCoin);
+                        newList.append(recSupply);
                     }
                     else {
                         // Have a modal pop up syaing Crypto doesn't exist when a user input is invalid?
