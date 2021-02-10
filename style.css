@@ -19,7 +19,7 @@ th {
 /* Hero Image Styling */
 .hero-image {
 background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("heroimage.jpg");
-height: 60%;
+height: 85%;
 
 /* Here image responsivness on all screens */
 background-position: center;

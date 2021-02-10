@@ -1,9 +1,16 @@
 $(document).ready(function () {
 
+    $(document).ready(function () {
+        $('.modal').modal();
+    });
+
     var submitCoin = document.querySelector('#magnify')
 
     var storedSearch = JSON.parse(localStorage.getItem("search")) || [];
     var recentCoin = "";
+
+    // Hide recent searches
+    $("#highlight").hide();
 
     // CoinGecko API
     function getApi() {
@@ -24,6 +31,14 @@ $(document).ready(function () {
 
             // On page load, these elements will be hidden. Once the user searches for a crypto it will display
             $('.hidden').removeClass("hidden");
+
+            // Hide popular crypto display 
+            $("#popular-coins").hide();
+
+            // Show recent searches 
+            $("#highlight").show();
+
+
 
             // This will clear out the previous search in the container div 
             $('#container').empty();
@@ -82,12 +97,17 @@ $(document).ready(function () {
                             maximumFractionDigits: 2,
                         });
 
-                        //Maximum Supply
-                        var maxCoin = $("<li>");
-                        maxCoin.addClass("span");
-                        maxCoin.append(maxSupply);
-                        maxCoin.html("Maximum Supply: " + format(maxSupply));
-                        console.log(maxSupply)
+                        // Maximum Supply
+                        if (maxSupply === null) {
+                            console.log("Maximum Supply is Null");
+                        }
+                        else {
+                            var maxCoin = $("<li>");
+                            maxCoin.addClass("span");
+                            maxCoin.append(maxSupply);
+                            maxCoin.html("Maximum Supply: " + format(maxSupply));
+                            console.log(maxSupply)
+                        }
 
                         //Circulating Supply
                         var recSupply = $("<li>");
@@ -170,6 +190,12 @@ $(document).ready(function () {
                         newList.append(recSupply);
                     }
                     else {
+                        $(document).ready(function () {
+                            $('#search').modal.textContent();
+                        });
+
+
+
                         // Have a modal pop up saying Crypto doesn't exist when a user input is invalid?
                         console.log("This is the else statement");
                     }
@@ -183,7 +209,8 @@ $(document).ready(function () {
 
     // This will make previous searches clickable
     $('body').on('click', '.value', function () {
-        $('body').keyDown();
+
+
         console.log($(this).text())
         recentCoin = $(this).text()
         // Bug #1 Explanation (part 2 of 2): Once the crypto is displayed, when you click on another recent search
@@ -196,6 +223,21 @@ $(document).ready(function () {
     })
 
     submitCoin.addEventListener('click', getApi);
+
+    // Event listener for enter/return key pressed
+    $("#search").on("keypress", function (event) {
+        // Could use keycode but which is more optimal for cross OS/Browser support
+        if (event.which === 13) {
+
+            // Disable textbox to prevent multiple submits
+            $(this).attr("disabled", "disabled");
+
+            getApi();
+
+            // Re-enable textbox
+            $(this).removeAttr("disabled");
+        }
+    })
 
     // submitCoin.on('click', function (event) {
     //     console.log(event);
