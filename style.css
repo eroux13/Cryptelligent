@@ -6,6 +6,16 @@ body, html {
     display: none;
 }
 
+/* Welcome Display */
+p {
+  text-align: center;
+}
+
+/* Popular Coins display */
+th {
+  text-align: center;
+}
+
 /* Hero Image Styling */
 .hero-image {
 background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("heroimage.jpg");
