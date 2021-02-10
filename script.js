@@ -83,11 +83,16 @@ $(document).ready(function () {
                         });
 
                         // Maximum Supply
-                        var maxCoin = $("<li>");
-                        maxCoin.addClass("span");
-                        maxCoin.append(maxSupply);
-                        maxCoin.html("Maximum Supply: $" + format(maxSupply));
-                        console.log(maxSupply)
+                        if (maxSupply === null) {
+                            console.log("Maximum Supply is Null");
+                        }
+                        else {
+                            var maxCoin = $("<li>");
+                            maxCoin.addClass("span");
+                            maxCoin.append(maxSupply);
+                            maxCoin.html("Maximum Supply: " + format(maxSupply));
+                            console.log(maxSupply)
+                        }
 
                         // Circulating Supply
                         var recSupply = $("<li>");
