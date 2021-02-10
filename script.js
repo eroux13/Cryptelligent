@@ -1,6 +1,10 @@
 
 $(document).ready(function () {
-  
+    
+    $(document).ready(function(){
+        $('.modal').modal();
+      });
+      
     var submitCoin = document.querySelector('#magnify')
 
     var storedSearch = JSON.parse(localStorage.getItem("search")) || [];
