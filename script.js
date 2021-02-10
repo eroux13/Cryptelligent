@@ -97,21 +97,21 @@ $(document).ready(function () {
                             maximumFractionDigits: 2,
                         });
 
-                        //Maximum Supply
+                        // Maximum Supply
                         var maxCoin = $("<li>");
                         maxCoin.addClass("span");
                         maxCoin.append(maxSupply);
-                        maxCoin.html("Maximum Supply: " + format(maxSupply));
+                        maxCoin.html("Maximum Supply: $" + format(maxSupply));
                         console.log(maxSupply)
 
-                        //Circulating Supply
+                        // Circulating Supply
                         var recSupply = $("<li>");
                         recSupply.addClass("span");
                         recSupply.append(circSupply);
-                        recSupply.html("Circulating Supply: " + format(circSupply));
+                        recSupply.html("Circulating Supply: $" + format(circSupply));
                         console.log(recSupply)
 
-                        //Daily Low Price
+                        // Daily Low Price
                         var dayTradeLow = $("<li>");
                         dayTradeLow.addClass("span");
                         dayTradeLow.append(dayLow);
