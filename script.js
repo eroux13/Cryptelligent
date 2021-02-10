@@ -1,5 +1,9 @@
 
 $(document).ready(function () {
+    
+    $(document).ready(function(){
+        $('.modal').modal();
+      });
 
     var submitCoin = document.querySelector('#magnify')
 
