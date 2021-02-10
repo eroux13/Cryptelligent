@@ -1,14 +1,14 @@
 
 $(document).ready(function () {
-  
+
     var submitCoin = document.querySelector('#magnify')
 
     var storedSearch = JSON.parse(localStorage.getItem("search")) || [];
     var recentCoin = "";
 
-    // Hide recent searches //
+    // Hide recent searches
     $("#highlight").hide();
-   
+
     // CoinGecko API
     function getApi() {
         var requestURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd";
@@ -25,18 +25,17 @@ $(document).ready(function () {
             // Bug #1 Explanation (part 1 of 2): Initially searchField will have a value since the user will input either the symbol or name
             // of the crypto. Once the getAPI() function has fully completed its run through the searchField is cleared (Line 134). Conintue to Line 141.
             var searchField = $("#search").val();
-    
+
             // On page load, these elements will be hidden. Once the user searches for a crypto it will display
             $('.hidden').removeClass("hidden");
 
-        
-             
-             // Hide popular crypto display //
-             $("#popular-coins").hide();
-            // Show recent searches //
+            // Hide popular crypto display 
+            $("#popular-coins").hide();
+
+            // Show recent searches 
             $("#highlight").show();
 
-            
+
 
             // This will clear out the previous search in the container div 
             $('#container').empty();
@@ -65,7 +64,7 @@ $(document).ready(function () {
                 // however when a user inputs the actual name it wouldn't run/display anything on the page
                 // this was being bypassed in the for loop below since we declared both a match with the symbol or the name
                 const match = data.find(coin => searchField === coin.symbol || searchField === coin.id)
-                
+
                 console.log(match);
 
                 $(match);
@@ -195,16 +194,16 @@ $(document).ready(function () {
                     }
                 }
             });
-            
+
             console.log(storedSearch);
             localStorage.setItem("search", JSON.stringify(storedSearch));
             $("#search").val("");
         }
     };
- 
+
     // This will make previous searches clickable
     $('body').on('click', '.value', function () {
-        
+
 
         console.log($(this).text())
         recentCoin = $(this).text()
@@ -220,6 +219,20 @@ $(document).ready(function () {
 
     submitCoin.addEventListener('click', getApi);
 
+    // Event listener for enter/return key pressed
+    $("#search").on("keypress", function (event) {
+        // Could use keycode but which is more optimal for cross OS/Browser support
+        if (event.which === 13) {
+
+            // Disable textbox to prevent multiple submits
+            $(this).attr("disabled", "disabled");
+
+            getApi();
+
+            // Re-enable textbox
+            $(this).removeAttr("disabled");
+        }
+    })
 
     // submitCoin.on('click', function (event) {
     //     console.log(event);
