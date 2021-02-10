@@ -5,137 +5,194 @@ $(document).ready(function () {
     var storedSearch = JSON.parse(localStorage.getItem("search")) || [];
     var recentCoin = "";
 
+    // CoinGecko API
     function getApi() {
         var requestURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd";
-        var searchField = $("#search").val();
+
+        // Bug #3 Explanation: So this newly added conditional will check to see if the container is already populated. If it is, it will clear its content
+        // similar to Line 29 then run the function again. If not, it will run getAPI() like usual.
+        if ($('#container').children().length > 0) {
+
+            $('#container').empty();
+            getApi();
+
+        }
+        else {
+            // Bug #1 Explanation (part 1 of 2): Initially searchField will have a value since the user will input either the symbol or name
+            // of the crypto. Once the getAPI() function has fully completed its run through the searchField is cleared (Line 134). Conintue to Line 141.
+            var searchField = $("#search").val();
+
+            // On page load, these elements will be hidden. Once the user searches for a crypto it will display
+            $('.hidden').removeClass("hidden");
+
+            // This will clear out the previous search in the container div 
+            $('#container').empty();
+
+            console.log(searchField);
+            storedSearch.push(searchField);
+            console.log("storedSearch = ", storedSearch);
+
+            var recent = $("#recent");
+            var inputValue = $("<h4>");
+            inputValue.addClass("value");
+
+            // Changed this to prepend so that the most recent searches populate on top
+            recent.prepend(inputValue);
+            inputValue.text(searchField);
+
+            $.ajax({
+                url: requestURL,
+                method: 'GET',
+            }).then(function (data) {
+
+                // Bug #2 Explanation: Added another conditional here
+                // At first we were comparing symbols so that if a user inputs the correct symbol it would display
+                // however when a user inputs the actual name it wouldn't run/display anything on the page
+                // this was being bypassed in the for loop below since we declared both a match with the symbol or the name
+                const match = data.find(coin => searchField === coin.symbol || searchField === coin.id)
+
+                console.log(match);
+
+                $(match);
+
+                console.log(data)
+
+                // Loop through all the possible cryptos
+                for (var i = 0; i < data.length; i++) {
+
+                    // Match the user input to crypto name or symbol
+                    if (searchField.toLowerCase() === data[i].id || searchField.toLowerCase() === data[i].symbol) {
+
+                        // Crypto dataset variables
+                        searchField = recentCoin;
+                        var cryptoImg = data[i].image;
+                        var coinName = data[i].name;
+                        var searchHistory = data[i].current_price;
+                        var marketCap = data[i].market_cap;
+                        var tradeVol = data[i].total_volume;
+                        var dayHigh = data[i].high_24h;
+                        var dayLow = data[i].low_24h;
+                        var maxSupply = data[i].max_supply;
+                        var circSupply = data[i].circulating_supply;
 
 
+                        // Function to format monetary value
+                        const format = (num) => num.toLocaleString('en-US', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                        });
 
+                        //Maximum Supply
+                        var maxCoin = $("<li>");
+                        maxCoin.addClass("span");
+                        maxCoin.append(maxSupply);
+                        maxCoin.html("Maximum Supply: " + format(maxSupply));
+                        console.log(maxSupply)
 
+                        //Circulating Supply
+                        var recSupply = $("<li>");
+                        recSupply.addClass("span");
+                        recSupply.append(circSupply);
+                        recSupply.html("Circulating Supply: " + format(circSupply));
+                        console.log(recSupply)
 
+                        //Daily Low Price
+                        var dayTradeLow = $("<li>");
+                        dayTradeLow.addClass("span");
+                        dayTradeLow.append(dayLow);
+                        dayTradeLow.html("24hr Low Price: $" + format(dayLow));
+                        console.log(dayLow);
 
-        console.log(searchField);
-        storedSearch.push(searchField);
-        console.log("storedSearch = ", storedSearch);
+                        // Daily High Price
+                        var dayTradeHigh = $("<li>");
+                        dayTradeHigh.addClass("span");
+                        dayTradeHigh.append(dayHigh);
+                        dayTradeHigh.html("24hr High Price: $" + format(dayHigh));
+                        console.log(dayHigh);
 
-        var recent = $("#recent");
-        var inputValue = $("<h4>");
-        inputValue.addClass("value");
+                        // Trading Volume
+                        var volDef = "https://www.investopedia.com/terms/v/volume.asp"
+                        console.log("Trade volume: " + tradeVol);
+                        var volTag = $("<li>");
+                        var volTagStacked = $("<a>");
+                        volTag.append(volTagStacked);
+                        volTagStacked.attr("href", volDef);
+                        volTag.addClass("span");
+                        volTagStacked.html(" Trading Volume: $" + format(tradeVol));
 
-        recent.append(inputValue);
-        inputValue.text(searchField);
+                        // Name of crypto
+                        console.log("Crypto : " + coinName);
+                        var cryptoName = $("<li>");
+                        cryptoName.addClass("span");
 
-        $.ajax({
-            url: requestURL,
-            method: 'GET',
-        }).then(function (data) {
+                        // Current Price
+                        console.log("Current Price: : " + searchHistory);
+                        var newList = $("<ul>");
+                        newList.addClass("form");
+                        var bitcoinName = $("<h3>");
+                        bitcoinName.attr("id", "bitcoin");
+                        bitcoinName.append(coinName);
+                        newList.append(bitcoinName);
 
-            const match = data.find(coin => searchField === coin.symbol)
-            //console.log("test2");
-            console.log(match);
+                        // Market price
+                        var mktDef = "https://www.investopedia.com/terms/m/market-price.asp"
+                        $("#container").append(newList);
+                        var curPrice = $("<li>");
+                        var curPriceStacked = $("<a>");
+                        curPrice.attr("id", "curPrice");
+                        curPrice.append(curPriceStacked)
+                        curPriceStacked.attr("href", mktDef);
+                        curPrice.addClass("span");
+                        curPriceStacked.html(" Market Price: $" + format(searchHistory));
 
-            $(match);
+                        // Market cap
+                        var defLink = "https://www.investopedia.com/terms/m/marketcapitalization.asp"
+                        console.log("Market Cap: " + marketCap);
+                        var mktCap = $("<li>");
+                        var mktCapStacked = $("<a>");
+                        mktCap.append(mktCapStacked);
+                        mktCapStacked.attr("href", defLink);
+                        mktCap.addClass("span");
+                        mktCapStacked.html(" Market Cap: $" + format(marketCap));
 
-            for (var i = 0; i < data.length; i++) {
+                        // Crypto img
+                        var cryptoImgItem = $("<img>");
+                        cryptoImgItem.attr("src", cryptoImg);
+                        cryptoImgItem.attr("id", "cryptoImg");
+                        $("#container").prepend(cryptoImgItem);
 
-                if (searchField === data.name || searchField === data.symbol) {
-                    searchField = recentCoin
-
-
-
-                    //Trading Volume
-                    var volDef = "https://www.investopedia.com/terms/v/volume.asp"
-                    var tradeVol = data[i].total_volume;
-                    var volTag = $("<li>");
-                    var volTagStacked = $("<a>");
-                    volTag.append(volTagStacked);
-                    volTagStacked.attr("href", volDef);
-                    volTag.addClass("span");
-                    volTagStacked.html(" Trading Volume: " + tradeVol);
-
-
-                    //name of crypto
-
-                    var coinName = data[i].name;
-                    var cryptoName = $("<li>");
-                    cryptoName.addClass("span");
-                    // cryptoName.attr("id", "target");
-                    //cryptoName.html(" Name " + coinName);
-
-                    //current search name
-                    var searchHistory = data[i].current_price;
-                    var newList = $("<ul>");
-                    newList.addClass("form");
-                    var bitcoinName = $("<h3>");
-                    bitcoinName.attr("id", "bitcoin");
-                    bitcoinName.append(coinName);
-                    newList.append(bitcoinName);
-
-                    //current price
-                    var mktDef = "https://www.investopedia.com/terms/m/market-price.asp"
-                    $("#container").append(newList);
-                    var curPrice = $("<li>");
-                    var curPriceStacked = $("<a>");
-                    curPrice.append(curPriceStacked)
-                    curPrice.addClass("span");
-                    curPriceStacked.html(" Market Price: " + searchHistory);
-
-
-                    //market cap
-                    var defLink = "https://www.investopedia.com/terms/m/marketcapitalization.asp"
-                    var marketCap = data[i].market_cap;
-                    var mktCap = $("<li>");
-                    var mktCapStacked = $("<a>");
-                    mktCap.append(mktCapStacked);
-                    mktCapStacked.attr("href", defLink);
-
-
-                    mktCap.addClass("span");
-                    mktCapStacked.html(" Market Cap: " + marketCap);
-
-
-
-                    // crypto img
-                    var cryptoImg = data[i].image;
-                    var cryptoImgItem = $("<img>");
-                    cryptoImgItem.attr("src", cryptoImg);
-                    $("#container").prepend(cryptoImgItem);
-
-
-
-                    newList.append(mktCap);
-                    //console.log(newItem2);
-                    newList.append(curPrice);
-                    //console.log(volTag.html)
-                    newList.append(volTag);
-
-
-
-
-
+                        newList.append(curPrice);
+                        newList.append(mktCap);
+                        newList.append(volTag);
+                        newList.append(dayTradeHigh);
+                        newList.append(dayTradeLow);
+                        newList.append(maxCoin);
+                        newList.append(recSupply);
+                    }
+                    else {
+                        // Have a modal pop up syaing Crypto doesn't exist when a user input is invalid?
+                        console.log("This is the else statement");
+                    }
                 }
-
-
-            }
-
-            //debugger;
-
-
-
-        });
-        console.log(storedSearch);
-        localStorage.setItem("search", JSON.stringify(storedSearch));
-        $("#search").val("");
-
-
+            });
+            console.log(storedSearch);
+            localStorage.setItem("search", JSON.stringify(storedSearch));
+            $("#search").val("");
+        }
     };
 
+    // This will make previous searches clickable
     $('body').on('click', '.value', function () {
         console.log($(this).text())
         recentCoin = $(this).text()
-        getApi()
+        // Bug #1 Explanation (part 2 of 2): Once the crypto is displayed, when you click on another recent search
+        // this event listener will run. recentCoin is set to whichever recent search is clicked, however no data is actually being
+        // passed back to getAPI(). The reason for this is in Line 14 where we set the searchField = $("#search").val(). When getAPI() is called here
+        // it runs through the function without a value since $("#search").val() is cleared after the first run through. It's looking for that user input.
+        // Line 146 is what solves that issue. we set $("#search").val() to whichever recent search is clicked on before passing it back to getAPI().
+        $("#search").val(recentCoin);
+        getApi();
     })
-
 
     submitCoin.addEventListener('click', getApi);
 
@@ -144,15 +201,15 @@ $(document).ready(function () {
     //     event.preventDefault();
     // });
 
+    // Leave this part commented out for now so that we dont use up all the API calls again
     // Bloomberg News API 
-    // Commented out for now since we hit the API Call limit (500/month for the free tier)
     // const settings = {
     //     "async": true,
     //     "crossDomain": true,
     //     "url": "https://bloomberg-market-and-financial-news.p.rapidapi.com/news/list?id=cryptocurrencies",
     //     "method": "GET",
     //     "headers": {
-    //         "x-rapidapi-key": "eafa0d1954mshd8afb1575ec2c58p1ab9adjsn0d8a873b3855",
+    //         "x-rapidapi-key": "00ff810bdamsh6cafd0d251bfd85p1e1d53jsnd43a5739af12",
     //         "x-rapidapi-host": "bloomberg-market-and-financial-news.p.rapidapi.com"
     //     }
     // };
