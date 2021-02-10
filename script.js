@@ -1,14 +1,10 @@
-
 $(document).ready(function () {
-  
+
     var submitCoin = document.querySelector('#magnify')
 
     var storedSearch = JSON.parse(localStorage.getItem("search")) || [];
     var recentCoin = "";
 
-    // Hide recent searches //
-    $("#highlight").hide();
-   
     // CoinGecko API
     function getApi() {
         var requestURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd";
@@ -25,18 +21,9 @@ $(document).ready(function () {
             // Bug #1 Explanation (part 1 of 2): Initially searchField will have a value since the user will input either the symbol or name
             // of the crypto. Once the getAPI() function has fully completed its run through the searchField is cleared (Line 134). Conintue to Line 141.
             var searchField = $("#search").val();
-    
+
             // On page load, these elements will be hidden. Once the user searches for a crypto it will display
             $('.hidden').removeClass("hidden");
-
-        
-             
-             // Hide popular crypto display //
-             $("#popular-coins").hide();
-            // Show recent searches //
-            $("#highlight").show();
-
-            
 
             // This will clear out the previous search in the container div 
             $('#container').empty();
@@ -57,15 +44,13 @@ $(document).ready(function () {
                 url: requestURL,
                 method: 'GET',
             }).then(function (data) {
-                // Hide welcome display //
-                $("#welcome-display").hide();
 
                 // Bug #2 Explanation: Added another conditional here
                 // At first we were comparing symbols so that if a user inputs the correct symbol it would display
                 // however when a user inputs the actual name it wouldn't run/display anything on the page
                 // this was being bypassed in the for loop below since we declared both a match with the symbol or the name
                 const match = data.find(coin => searchField === coin.symbol || searchField === coin.id)
-                
+
                 console.log(match);
 
                 $(match);
@@ -97,21 +82,21 @@ $(document).ready(function () {
                             maximumFractionDigits: 2,
                         });
 
-                        // Maximum Supply
+                        //Maximum Supply
                         var maxCoin = $("<li>");
                         maxCoin.addClass("span");
                         maxCoin.append(maxSupply);
-                        maxCoin.html("Maximum Supply: $" + format(maxSupply));
+                        maxCoin.html("Maximum Supply: " + format(maxSupply));
                         console.log(maxSupply)
 
-                        // Circulating Supply
+                        //Circulating Supply
                         var recSupply = $("<li>");
                         recSupply.addClass("span");
                         recSupply.append(circSupply);
-                        recSupply.html("Circulating Supply: $" + format(circSupply));
+                        recSupply.html("Circulating Supply: " + format(circSupply));
                         console.log(recSupply)
 
-                        // Daily Low Price
+                        //Daily Low Price
                         var dayTradeLow = $("<li>");
                         dayTradeLow.addClass("span");
                         dayTradeLow.append(dayLow);
@@ -185,22 +170,20 @@ $(document).ready(function () {
                         newList.append(recSupply);
                     }
                     else {
-                        // Have a modal pop up syaing Crypto doesn't exist when a user input is invalid?
+                        // Have a modal pop up saying Crypto doesn't exist when a user input is invalid?
                         console.log("This is the else statement");
                     }
                 }
             });
-            
             console.log(storedSearch);
             localStorage.setItem("search", JSON.stringify(storedSearch));
             $("#search").val("");
         }
     };
- 
+
     // This will make previous searches clickable
     $('body').on('click', '.value', function () {
-        
-
+        $('body').keyDown();
         console.log($(this).text())
         recentCoin = $(this).text()
         // Bug #1 Explanation (part 2 of 2): Once the crypto is displayed, when you click on another recent search
@@ -210,11 +193,9 @@ $(document).ready(function () {
         // Line 146 is what solves that issue. we set $("#search").val() to whichever recent search is clicked on before passing it back to getAPI().
         $("#search").val(recentCoin);
         getApi();
-
     })
 
     submitCoin.addEventListener('click', getApi);
-
 
     // submitCoin.on('click', function (event) {
     //     console.log(event);
