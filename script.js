@@ -1,5 +1,13 @@
 
 $(document).ready(function () {
+    //Slider script //
+    $(document).ready(function(){
+        $('.slider').slider();
+      });
+
+      $(document).ready(function(){
+        $('.modal').modal();
+      });
   
     var submitCoin = document.querySelector('#magnify')
 
@@ -31,8 +39,8 @@ $(document).ready(function () {
 
         
              
-             // Hide popular crypto display //
-             $("#popular-coins").hide();
+             // Hide crypto basics display //
+             $("#crypto-basics").hide();
             // Show recent searches //
             $("#highlight").show();
 
