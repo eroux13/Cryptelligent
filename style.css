@@ -1,35 +1,75 @@
 body, html {
   height: 100%;
+
+ 
+}
+
+main {
+  border-top: 5px dotted teal;
+  background-color: lightgray;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .hidden {
     display: none;
 }
 
-/* Welcome Display */
-#slide-one {
 
+/* Welcome Display - Slider */
+.slider {
+  margin-top: 30px;
+}
+#slide-one {
+  background-color: #00263c;
 }
 #slide-two{
-
+  background-color:goldenrod;
 }
 #slide-three {
+  background-color: #00263c;
 
 }
 #slide-four {
+  background-color:goldenrod;
 
 }
 /* Welcome Display End */
 
-/* Popular Coins display */
+/* Crypto Basics display */
 th {
   text-align: center;
+  color: #00263c;
+  font-size:x-large;
+}
+
+.modal-trigger {
+  background-color: goldenrod;
+  align-items: center;
+  font-weight: bolder;
+  border-radius: 12px;
+  box-shadow: 0 8px 12px 0 rgba(245, 245, 245, 0.2), 0 6px 15px 0 rgba(255, 255, 255, 0.19);
+}
+
+.modal-trigger:hover {
+  background-color:#00263c;
+}
+
+.btn.modal-trigger:visited {
+  background-color:grey;
+}
+
+.modal-content{
+  font-size:larger;
+}
+
+h4{
+  color:#00263c;
 }
 
 /* Hero Image Styling */
 .hero-image {
 background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("heroimage.jpg");
-height: 85%;
+height: 60% ;
 
 /* Hero image responsivness on all screens */
 background-position: center;

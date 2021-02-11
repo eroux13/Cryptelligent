@@ -4,11 +4,22 @@ $(document).ready(function () {
     //Slider script //
     $(document).ready(function () {
         $('.slider').slider();
+<<<<<<< HEAD
     });
 
     $(document).ready(function () {
         $('.modal').modal();
     });
+=======
+      });
+  
+    $(document).ready(function(){
+        $('.modal').modal();
+      });
+
+   
+
+>>>>>>> d1236e51cf28c7c28eb8eef2094fc29295939353
 
     var submitCoin = document.querySelector('#magnify')
 
