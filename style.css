@@ -7,9 +7,22 @@ body, html {
 }
 
 /* Welcome Display */
-p {
-  text-align: center;
+#slide-one {
+
 }
+#slide-two{
+
+}
+#slide-three {
+
+}
+#slide-four {
+
+}
+
+
+
+
 
 /* Popular Coins display */
 th {
@@ -37,6 +50,12 @@ position: relative;
   color: white;
 }
 /* Hero Image Styling End */
+
+/* Carousel styling */
+#homepage-background-image {
+  position: absolute;
+  
+}
 
 /* News Feed Styling */
 #flexDirection {

@@ -1,9 +1,17 @@
 
 $(document).ready(function () {
+
+    //Slider script //
+    $(document).ready(function(){
+        $('.slider').slider();
+      });
+  
+
     
     $(document).ready(function(){
         $('.modal').modal();
       });
+
 
     var submitCoin = document.querySelector('#magnify')
 
@@ -33,10 +41,18 @@ $(document).ready(function () {
             // On page load, these elements will be hidden. Once the user searches for a crypto it will display
             $('.hidden').removeClass("hidden");
 
+
+        
+             
+             // Hide crypto basics display //
+             $("#crypto-basics").hide();
+            // Show recent searches //
+
             // Hide popular crypto display 
             $("#popular-coins").hide();
 
             // Show recent searches 
+
             $("#highlight").show();
 
 
