@@ -19,10 +19,7 @@ body, html {
 #slide-four {
 
 }
-
-
-
-
+/* Welcome Display End */
 
 /* Popular Coins display */
 th {
@@ -70,6 +67,10 @@ position: relative;
 /* Footer Styling End */
 
 /* Trading History Styling*/
+#tradingHistory{
+    padding: 15px;
+}
+
 .span {
   margin: 10px 0;
   padding: 0.5em;
@@ -80,6 +81,7 @@ position: relative;
 
 #bitcoin {
   font-family: cursive;
+  margin-left: 36px;
 }
 
 #curPrice{
