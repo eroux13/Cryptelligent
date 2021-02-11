@@ -1,19 +1,15 @@
 $(document).ready(function () {
 
-<<<<<<< HEAD
-    $(document).ready(function () {
-=======
     //Slider script //
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('.slider').slider();
-      });
-  
-    $(document).ready(function(){
->>>>>>> 2eaff55a0ba9648364ec328e6e35fba908aedf67
+    });
+
+    $(document).ready(function () {
         $('.modal').modal();
     });
 
-   
+
 
 
     var submitCoin = document.querySelector('#magnify')
@@ -45,10 +41,10 @@ $(document).ready(function () {
             $('.hidden').removeClass("hidden");
 
 
-        
-             
-             // Hide crypto basics display //
-             $("#crypto-basics").hide();
+
+
+            // Hide crypto basics display //
+            $("#crypto-basics").hide();
             // Show recent searches //
 
             // Hide popular crypto display 
@@ -210,10 +206,6 @@ $(document).ready(function () {
                         newList.append(recSupply);
                     }
                     else {
-                        $(document).ready(function () {
-                            $('#search').modal.textContent();
-                        });
-
 
 
                         // Have a modal pop up saying Crypto doesn't exist when a user input is invalid?
