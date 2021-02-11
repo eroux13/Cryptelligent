@@ -1,6 +1,11 @@
 
 $(document).ready(function () {
 
+    //Slider script //
+    $(document).ready(function () {
+        $('.slider').slider();
+    });
+
     $(document).ready(function () {
         $('.modal').modal();
     });
@@ -33,13 +38,15 @@ $(document).ready(function () {
             // On page load, these elements will be hidden. Once the user searches for a crypto it will display
             $('.hidden').removeClass("hidden");
 
+            // Hide crypto basics display //
+            $("#crypto-basics").hide();
+            // Show recent searches //
+
             // Hide popular crypto display 
             $("#popular-coins").hide();
 
             // Show recent searches 
             $("#highlight").show();
-
-
 
             // This will clear out the previous search in the container div 
             $('#container').empty();
@@ -93,7 +100,6 @@ $(document).ready(function () {
                         var maxSupply = data[i].max_supply;
                         var circSupply = data[i].circulating_supply;
 
-
                         // Function to format monetary value
                         const format = (num) => num.toLocaleString('en-US', {
                             minimumFractionDigits: 2,
@@ -108,7 +114,7 @@ $(document).ready(function () {
                             var maxCoin = $("<li>");
                             maxCoin.addClass("span");
                             maxCoin.append(maxSupply);
-                            maxCoin.html("Maximum Supply: " + format(maxSupply));
+                            maxCoin.html("Maximum Supply: " + maxSupply.toLocaleString() + " coins");
                             console.log(maxSupply)
                         }
 
@@ -116,7 +122,7 @@ $(document).ready(function () {
                         var recSupply = $("<li>");
                         recSupply.addClass("span");
                         recSupply.append(circSupply);
-                        recSupply.html("Circulating Supply: $" + format(circSupply));
+                        recSupply.html("Circulating Supply: " + circSupply.toLocaleString("en") + " coins");
                         console.log(recSupply)
 
                         // Daily Low Price
