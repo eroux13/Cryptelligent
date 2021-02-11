@@ -99,17 +99,15 @@
           <h5>Not sure how it works? Check out this quick video:</h5>
           <iframe width="560" height="315" src="https://www.youtube.com/embed/Mvrq8hLjcRk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-    </div>
+        </div>
       <!-- This content will be: 9-columns-wide on large screens, 8-columns-wide on medium screens, 12-columns-wide on small screens  -->
       <h5 class="header center-align hidden">Trading History</h5>
-      <div class="card horizontal hoverable">
-        <div class="card-stacked">
-          <div id="container" class="card-content hidden">
-            <!-- Search results will dynamically appear here -->
-          </div>
-          <div class="card-action center-align hidden">
-            <div class="row horizontal">
-              <div class="col s2">
+      <div class="card horizontal hoverable hidden"> 
+        <div class="row hidden">
+          <div class="card-content col s4">
+            <div id="container" class="card-content responsive hidden"></div>
+              <!-- Search results will dynamically appear here -->
+              <div class="col s4 hidden"> <!-- Hidden modal code begins -->
                 <!-- Modal Trigger -->
                 <a class="waves-effect waves-light btn modal-trigger" href="#modal1">TRADE NOW</a>
                 <!-- Modal Structure -->
@@ -153,13 +151,16 @@
                       </form>
                     </div>
                   </div>
-                  <div class="modal-footer">
-                    <a href="#" class="modal-close waves-effect waves-green btn-flat">Close</a>
-                  </div>
-                </div>
-              </div>
+                    <div class="modal-footer">
+                      <a href="#" class="modal-close waves-effect waves-green btn-flat">Close</a>
+                    </div>
+                </div>  
+              </div> <!-- hidden modal ends -->
             </div>
           </div>
+            <div class="card-content col s8 hidden">
+              <img class="responsive-img" src="graph.jpg">
+            </div>
         </div>
       </div>
       <!-- Crypto Stories News feed -->
