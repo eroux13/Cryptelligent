@@ -21,7 +21,7 @@ th {
 background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("heroimage.jpg");
 height: 85%;
 
-/* Here image responsivness on all screens */
+/* Hero image responsivness on all screens */
 background-position: center;
 background-repeat: no-repeat;
 background-size: cover;
