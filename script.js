@@ -6,11 +6,11 @@ $(document).ready(function () {
         $('.slider').slider();
       });
   
-
-    
     $(document).ready(function(){
         $('.modal').modal();
       });
+
+   
 
 
     var submitCoin = document.querySelector('#magnify')
