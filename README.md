@@ -30,6 +30,6 @@ The following API's were used:
 
 # Screenshots
 
-New User Welcome Screen![screenshot](https://github.com/eroux13/Cryptelligent/blob/main/images/home_ss)
-Live Data Screenshot![screenshotd](https://github.com/eroux13/Cryptelligent/blob/main/images/data_ss)
-Cryptocurreny information![screenshot](https://github.com/eroux13/Cryptelligent/blob/main/images/info_ss)
+New User Welcome Screen![screenshot](./images/home_ss)
+Live Data Screenshot![screenshot](./images/data_ss)
+Cryptocurreny information![screenshot](./images/info_ss)
