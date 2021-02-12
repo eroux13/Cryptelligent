@@ -30,6 +30,6 @@ The following API's were used:
 
 # Screenshots
 
-New User Welcome Screen![screenshot](./images/home_ss)
-Live Data Screenshot![screenshot](./images/data_ss)
-Cryptocurreny information![screenshot](./images/info_ss)
+New User Welcome Screen![screenshot](./images/home_ss.png)
+Live Data Screenshot![screenshot](./images/data_ss.png)
+Cryptocurreny information![screenshot](./images/info_ss.png)
