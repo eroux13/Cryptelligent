@@ -4,7 +4,6 @@ $(document).ready(function () {
     //Slider script //
     $('.slider').slider();
 
-
     $('.modal').modal();
 
     var submitCoin = document.querySelector('#magnify')
