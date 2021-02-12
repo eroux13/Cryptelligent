@@ -1,4 +1,8 @@
 # Cryptelligent
+![HTML](https://img.shields.io/badge/HTML-55.6%25-red)
+![CSS](https://img.shields.io/badge/CSS-5.5%25-purple)
+![JavaScript](https://img.shields.io/badge/JavaScript-38.9%25-yellow)
+![Contributors](https://img.shields.io/badge/Contributors-4-green)
 
 Welcome to Cryptelligent! This app that allows you to search the trending
 cryptocurrencies and monitor specific coins, as well as read related stories on crypto.
@@ -30,6 +34,11 @@ The following API's were used:
 
 # Screenshots
 
-New User Welcome Screen![screenshot](./images/home_ss.png)
-Live Data Screenshot![screenshot](./images/data_ss.png)
-Cryptocurreny information![screenshot](./images/info_ss.png)
+New User Welcome Screen
+![screenshot](./images/home_ss.png)
+
+Live Data Screenshot
+![screenshot](./images/data_ss.png)
+
+Cryptocurreny Information
+![screenshot](./images/info_ss.png)
