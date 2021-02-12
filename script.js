@@ -1,16 +1,15 @@
-
 $(document).ready(function () {
 
     //Slider script //
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('.slider').slider();
-      });
-  
-    $(document).ready(function(){
-        $('.modal').modal();
-      });
+    });
 
-   
+    $(document).ready(function () {
+        $('.modal').modal();
+    });
+
+
 
 
     var submitCoin = document.querySelector('#magnify')
@@ -42,10 +41,10 @@ $(document).ready(function () {
             $('.hidden').removeClass("hidden");
 
 
-        
-             
-             // Hide crypto basics display //
-             $("#crypto-basics").hide();
+
+
+            // Hide crypto basics display //
+            $("#crypto-basics").hide();
             // Show recent searches //
 
             // Hide popular crypto display 
@@ -128,14 +127,14 @@ $(document).ready(function () {
                             console.log(maxSupply)
                         }
 
-                        // Circulating Supply
+                        //Circulating Supply
                         var recSupply = $("<li>");
                         recSupply.addClass("span");
                         recSupply.append(circSupply);
-                        recSupply.html("Circulating Supply: $" + format(circSupply));
+                        recSupply.html("Circulating Supply: " + format(circSupply));
                         console.log(recSupply)
 
-                        // Daily Low Price
+                        //Daily Low Price
                         var dayTradeLow = $("<li>");
                         dayTradeLow.addClass("span");
                         dayTradeLow.append(dayLow);
@@ -209,12 +208,13 @@ $(document).ready(function () {
                         newList.append(recSupply);
                     }
                     else {
-                        // Have a modal pop up syaing Crypto doesn't exist when a user input is invalid?
+
+
+                        // Have a modal pop up saying Crypto doesn't exist when a user input is invalid?
                         console.log("This is the else statement");
                     }
                 }
             });
-
             console.log(storedSearch);
             localStorage.setItem("search", JSON.stringify(storedSearch));
             $("#search").val("");
@@ -234,7 +234,6 @@ $(document).ready(function () {
         // Line 146 is what solves that issue. we set $("#search").val() to whichever recent search is clicked on before passing it back to getAPI().
         $("#search").val(recentCoin);
         getApi();
-
     })
 
     submitCoin.addEventListener('click', getApi);
