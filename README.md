@@ -4,6 +4,7 @@ Welcome to Cryptelligent! This app that allows you to search the trending
 cryptocurrencies and monitor specific coins, as well as read related stories on crypto.
 
 ## Description
+
 The purpose of this project was to create an online application for new investors who wish to learn more about the world of cryptocurrency. Upon visiting the application, users will be greeted with a short slider introducing the use and purpose, so they know how to use it.
 
 Firstly, Users can use short lessons on the sidebar to learn about pertinent topics that they should be aware of before investing. A few examples:
@@ -25,9 +26,10 @@ The following API's were used:
 * [Bloomberg News](https://www.bloomberg.com/professional/support/api-library/)
 
 
-[Click here to get started!](insert link)
+[Click here to get started!](https://eroux13.github.io/Cryptelligent/)
 
 # Screenshots
-New User Welcome Screen![screenshot of welcome](insert SS)
-Live Data Screenshot![screenshot of dashboard](insert SS)
-Cryptocurrency News and Trends![screenshot of dashboard](insert SS)
+
+New User Welcome Screen![screenshot](https://github.com/eroux13/Cryptelligent/blob/main/images/home_ss)
+Live Data Screenshot![screenshotd](https://github.com/eroux13/Cryptelligent/blob/main/images/data_ss)
+Cryptocurreny information![screenshot](https://github.com/eroux13/Cryptelligent/blob/main/images/info_ss)
