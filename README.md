@@ -25,9 +25,9 @@ The following API's were used:
 * [Bloomberg News](https://www.bloomberg.com/professional/support/api-library/)
 
 
-[Click here to get started!](insert link)
+[Click here to get started!](https://eroux13.github.io/Cryptelligent/)
 
 # Screenshots
-New User Welcome Screen![screenshot of welcome](insert SS)
-Live Data Screenshot![screenshot of dashboard](insert SS)
-Cryptocurrency News and Trends![screenshot of dashboard](insert SS)
+New User Welcome Screen![screenshot](https://github.com/eroux13/Cryptelligent/blob/main/images/home_ss)
+Live Data Screenshot![screenshotd](https://github.com/eroux13/Cryptelligent/blob/main/images/data_ss)
+Cryptocurreny information![screenshot](https://github.com/eroux13/Cryptelligent/blob/main/images/info_ss)
