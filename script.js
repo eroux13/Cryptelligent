@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
 
     //Slider script //
@@ -113,14 +112,14 @@ $(document).ready(function () {
                             console.log(maxSupply)
                         }
 
-                        // Circulating Supply
+                        //Circulating Supply
                         var recSupply = $("<li>");
                         recSupply.addClass("span");
                         recSupply.append(circSupply);
                         recSupply.html("Circulating Supply: " + circSupply.toLocaleString() + " coins");
                         console.log(recSupply)
 
-                        // Daily Low Price
+                        //Daily Low Price
                         var dayTradeLow = $("<li>");
                         dayTradeLow.addClass("span");
                         dayTradeLow.append(dayLow);
@@ -216,7 +215,6 @@ $(document).ready(function () {
         // Line 146 is what solves that issue. we set $("#search").val() to whichever recent search is clicked on before passing it back to getAPI().
         $("#search").val(recentCoin);
         getApi();
-
     })
 
     submitCoin.addEventListener('click', getApi);
