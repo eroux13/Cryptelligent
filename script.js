@@ -75,6 +75,8 @@ $(document).ready(function () {
                 url: requestURL,
                 method: 'GET',
             }).then(function (data) {
+                // Hide welcome display //
+                $("#welcome-display").hide();
 
                 // Bug #2 Explanation: Added another conditional here
                 // At first we were comparing symbols so that if a user inputs the correct symbol it would display
