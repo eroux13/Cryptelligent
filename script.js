@@ -1,16 +1,9 @@
 $(document).ready(function () {
 
     //Slider script //
-    $(document).ready(function () {
-        $('.slider').slider();
-    });
+    $('.slider').slider();
 
-    $(document).ready(function () {
-        $('.modal').modal();
-    });
-
-
-
+    $('.modal').modal();
 
     var submitCoin = document.querySelector('#magnify')
 
@@ -23,7 +16,6 @@ $(document).ready(function () {
     // CoinGecko API
     function getApi() {
         var requestURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd";
-
         // Bug #3 Explanation: So this newly added conditional will check to see if the container is already populated. If it is, it will clear its content
         // similar to Line 29 then run the function again. If not, it will run getAPI() like usual.
         if ($('#container').children().length > 0) {
@@ -40,9 +32,6 @@ $(document).ready(function () {
             // On page load, these elements will be hidden. Once the user searches for a crypto it will display
             $('.hidden').removeClass("hidden");
 
-
-
-
             // Hide crypto basics display //
             $("#crypto-basics").hide();
             // Show recent searches //
@@ -51,10 +40,7 @@ $(document).ready(function () {
             $("#popular-coins").hide();
 
             // Show recent searches 
-
             $("#highlight").show();
-
-
 
             // This will clear out the previous search in the container div 
             $('#container').empty();
@@ -108,7 +94,6 @@ $(document).ready(function () {
                         var maxSupply = data[i].max_supply;
                         var circSupply = data[i].circulating_supply;
 
-
                         // Function to format monetary value
                         const format = (num) => num.toLocaleString('en-US', {
                             minimumFractionDigits: 2,
@@ -123,7 +108,7 @@ $(document).ready(function () {
                             var maxCoin = $("<li>");
                             maxCoin.addClass("span");
                             maxCoin.append(maxSupply);
-                            maxCoin.html("Maximum Supply: " + format(maxSupply));
+                            maxCoin.html("Maximum Supply: " + maxSupply.toLocaleString() + " coins");
                             console.log(maxSupply)
                         }
 
@@ -131,7 +116,7 @@ $(document).ready(function () {
                         var recSupply = $("<li>");
                         recSupply.addClass("span");
                         recSupply.append(circSupply);
-                        recSupply.html("Circulating Supply: " + format(circSupply));
+                        recSupply.html("Circulating Supply: " + circSupply.toLocaleString() + " coins");
                         console.log(recSupply)
 
                         //Daily Low Price
@@ -206,11 +191,9 @@ $(document).ready(function () {
                         newList.append(dayTradeLow);
                         newList.append(maxCoin);
                         newList.append(recSupply);
+                        console.log("Enf of if statement")
                     }
                     else {
-
-
-                        // Have a modal pop up saying Crypto doesn't exist when a user input is invalid?
                         console.log("This is the else statement");
                     }
                 }
@@ -223,8 +206,6 @@ $(document).ready(function () {
 
     // This will make previous searches clickable
     $('body').on('click', '.value', function () {
-
-
         console.log($(this).text())
         recentCoin = $(this).text()
         // Bug #1 Explanation (part 2 of 2): Once the crypto is displayed, when you click on another recent search

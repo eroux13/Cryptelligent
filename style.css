@@ -99,6 +99,10 @@ h4{
 /* Footer Styling End */
 
 /* Trading History Styling*/
+#tradingHistory{
+    padding: 15px;
+}
+
 .span {
   margin: 10px 0;
   padding: 0.5em;
@@ -109,6 +113,7 @@ h4{
 
 #bitcoin {
   font-family: cursive;
+  margin-left: 36px;
 }
 
 #curPrice{
