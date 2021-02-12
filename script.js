@@ -2,24 +2,10 @@
 $(document).ready(function () {
 
     //Slider script //
-    $(document).ready(function () {
-        $('.slider').slider();
-<<<<<<< HEAD
-    });
+    $('.slider').slider();
 
-    $(document).ready(function () {
-        $('.modal').modal();
-    });
-=======
-      });
-  
-    $(document).ready(function(){
-        $('.modal').modal();
-      });
 
-   
-
->>>>>>> d1236e51cf28c7c28eb8eef2094fc29295939353
+    $('.modal').modal();
 
     var submitCoin = document.querySelector('#magnify')
 
@@ -32,7 +18,6 @@ $(document).ready(function () {
     // CoinGecko API
     function getApi() {
         var requestURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd";
-
         // Bug #3 Explanation: So this newly added conditional will check to see if the container is already populated. If it is, it will clear its content
         // similar to Line 29 then run the function again. If not, it will run getAPI() like usual.
         if ($('#container').children().length > 0) {
@@ -133,7 +118,7 @@ $(document).ready(function () {
                         var recSupply = $("<li>");
                         recSupply.addClass("span");
                         recSupply.append(circSupply);
-                        recSupply.html("Circulating Supply: " + circSupply.toLocaleString("en") + " coins");
+                        recSupply.html("Circulating Supply: " + circSupply.toLocaleString() + " coins");
                         console.log(recSupply)
 
                         // Daily Low Price
@@ -208,14 +193,13 @@ $(document).ready(function () {
                         newList.append(dayTradeLow);
                         newList.append(maxCoin);
                         newList.append(recSupply);
+                        console.log("Enf of if statement")
                     }
                     else {
-                        // Have a modal pop up syaing Crypto doesn't exist when a user input is invalid?
                         console.log("This is the else statement");
                     }
                 }
             });
-
             console.log(storedSearch);
             localStorage.setItem("search", JSON.stringify(storedSearch));
             $("#search").val("");
@@ -224,8 +208,6 @@ $(document).ready(function () {
 
     // This will make previous searches clickable
     $('body').on('click', '.value', function () {
-
-
         console.log($(this).text())
         recentCoin = $(this).text()
         // Bug #1 Explanation (part 2 of 2): Once the crypto is displayed, when you click on another recent search
