@@ -64,7 +64,7 @@ $(document).ready(function () {
             }).then(function (data) {
                 // Hide welcome display //
                 $("#welcome-display").hide();
-
+                console.log("this ", this);
                 // Bug #2 Explanation: Added another conditional here
                 // At first we were comparing symbols so that if a user inputs the correct symbol it would display
                 // however when a user inputs the actual name it wouldn't run/display anything on the page
