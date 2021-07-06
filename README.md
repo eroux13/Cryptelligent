@@ -1,6 +1,11 @@
 # Cryptelligent
 
-Welcome to Cryptelligent! This app that allows you to search the trending
+![HTML](https://img.shields.io/badge/HTML-55.6%25-red)
+![CSS](https://img.shields.io/badge/CSS-5.5%25-purple)
+![JavaScript](https://img.shields.io/badge/JavaScript-38.9%25-yellow)
+![Contributors](https://img.shields.io/badge/Contributors-4-green)
+
+Welcome to Cryptelligent! This app allows you to search the trending
 cryptocurrencies and monitor specific coins, as well as read related stories on crypto.
 
 ## Description
