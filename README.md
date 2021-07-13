@@ -43,3 +43,11 @@ The following API's were used:
 New User Welcome Screen![screenshot](./images/home_ss.png)
 Live Data Screenshot![screenshot](./images/data_ss.png)
 Cryptocurreny information![screenshot](./images/info_ss.png)
+
+## Deployed Link
+
+https://eroux13.github.io/Cryptelligent
+
+## Link to Github
+
+https://github.com/eroux13/Cryptelligent
